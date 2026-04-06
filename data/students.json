@@ -1,0 +1,92 @@
+[
+  {
+    "id": "s-01",
+    "name": "Rahul Sharma",
+    "course": "Data Science",
+    "role": "Data Analyst",
+    "company": "Infosys",
+    "salary": "₹6 LPA",
+    "image": "images/student-1.jpg"
+  },
+  {
+    "id": "s-02",
+    "name": "Sneha Reddy",
+    "course": "Web Development",
+    "role": "Frontend Developer",
+    "company": "TCS",
+    "salary": "₹5.5 LPA",
+    "image": "images/student-2.jpg"
+  },
+  {
+    "id": "s-03",
+    "name": "Vikram Patel",
+    "course": "Digital Marketing",
+    "role": "SEO Specialist",
+    "company": "Ogilvy",
+    "salary": "₹4.8 LPA",
+    "image": "images/student-3.jpg"
+  },
+  {
+    "id": "s-04",
+    "name": "Ayesha Khan",
+    "course": "AI Automation",
+    "role": "AI Engineer",
+    "company": "Wipro",
+    "salary": "₹7.5 LPA",
+    "image": "images/student-4.jpg"
+  },
+  {
+    "id": "s-05",
+    "name": "Karan Singh",
+    "course": "Web Development",
+    "role": "Software Engineer",
+    "company": "Cognizant",
+    "salary": "₹6 LPA",
+    "image": "images/student-5.jpg"
+  },
+  {
+    "id": "s-06",
+    "name": "Pooja Desai",
+    "course": "Data Science",
+    "role": "Data Scientist",
+    "company": "Accenture",
+    "salary": "₹8 LPA",
+    "image": "images/student-6.jpg"
+  },
+  {
+    "id": "s-07",
+    "name": "Amit Kumar",
+    "course": "Video Editing",
+    "role": "Video Editor",
+    "company": "Media.net",
+    "salary": "₹4.5 LPA",
+    "image": "images/student-7.jpg"
+  },
+  {
+    "id": "s-08",
+    "name": "Neha Gupta",
+    "course": "Graphic Design",
+    "role": "UI Designer",
+    "company": "Zoho",
+    "salary": "₹5 LPA",
+    "image": "images/student-8.jpg"
+  },
+  {
+    "id": "s-09",
+    "name": "Siddharth Jain",
+    "course": "Web Development",
+    "role": "Full Stack Dev",
+    "company": "Capgemini",
+    "salary": "₹5.8 LPA",
+    "image": "images/student-9.jpg"
+  },
+  {
+    "id": "s-10",
+    "name": "Arjun Nair",
+    "course": "Data Science",
+    "role": "ML Engineer",
+    "company": "IBM",
+    "salary": "₹9 LPA",
+    "image": "images/student-10.jpg"
+  }
+]
