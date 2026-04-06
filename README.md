@@ -2,9 +2,14 @@
 
 A static website project showcasing courses, placed students, reviews, and detailed contact/about pages for the SQTS training institute.
 
-## 🚀 Live Demo
+## 📖 Full Documentation
+Looking for technical details? Check out our comprehensive **[PROJECT DOCUMENTATION](PROJECT_DOCUMENTATION.md)** which explains the tech stack, dynamic JS injection, and deployment lifecycle in detail.
 
-**[View the Live Website](https://sqts-2.vercel.app)**
+## 🚀 Live Demos
+
+We have configured two high-speed CDN deployments for this project:
+- **[Primary (Vercel)](https://sqts-2.vercel.app)**
+- **[Secondary (GitHub Pages)](https://parminder-21.github.io/SQTS_project-2.0/)**
 
 ## 📂 Project Structure
 
@@ -25,9 +30,4 @@ A static website project showcasing courses, placed students, reviews, and detai
 
 ## 📡 Deployment
 
-This project is deployed using [Vercel](https://vercel.com).
-To deploy changes via the Vercel CLI locally, run:
-
-```bash
-vercel --prod
-```
+This project utilizes CI/CD pipelines via Vercel and GitHub Actions. Pushing to the `main` GitHub branch will automatically trigger a rebuild and deploy to both the live environments shown above in seconds.
