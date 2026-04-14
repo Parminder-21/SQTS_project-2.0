@@ -1,9 +1,8 @@
-import { getDb } from '@/lib/db';
+import { dbAll } from '@/lib/db';
 import Link from 'next/link';
 
 export default async function CoursesPage() {
-  const db = await getDb();
-  const rawCourses = await db.all('SELECT * FROM courses');
+  const rawCourses = await dbAll('SELECT * FROM courses');
   
   const courses = rawCourses.map(course => ({
     ...course,

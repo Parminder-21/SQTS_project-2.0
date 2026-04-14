@@ -1,11 +1,10 @@
-import { getDb } from '@/lib/db';
+import { dbGet } from '@/lib/db';
 import Link from 'next/link';
 
 export default async function CourseDetail({ params }) {
   const { id } = await params;
-  const db = await getDb();
   
-  const rawCourse = await db.get('SELECT * FROM courses WHERE id = ?', [id]);
+  const rawCourse = await dbGet('SELECT * FROM courses WHERE id = ?', [id]);
   
   if (!rawCourse) {
     return (
