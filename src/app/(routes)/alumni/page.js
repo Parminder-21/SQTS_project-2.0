@@ -1,5 +1,7 @@
 import { dbAll } from '@/lib/db';
 
+export const dynamic = 'force-dynamic';
+
 export default async function AlumniPage() {
   // We fetch alumni records from the 'students' table (which was seeded with legacy placed-students data)
   const students = await dbAll('SELECT * FROM students');

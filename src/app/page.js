@@ -66,9 +66,14 @@ export default function Home() {
 
   useEffect(() => {
     fetch('/api/courses')
-      .then(res => res.json())
-      .then(data => setCourses(data.slice(0, 3)))
-      .catch(console.error);
+      .then(res => {
+        if (!res.ok) throw new Error(`API error: ${res.status}`);
+        return res.json();
+      })
+      .then(data => {
+        if (Array.isArray(data)) setCourses(data.slice(0, 3));
+      })
+      .catch(err => console.error('Failed to load courses:', err));
   }, []);
 
   return (
