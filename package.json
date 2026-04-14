@@ -1,12 +1,15 @@
 {
-  "name": "sqts-app",
-  "version": "0.1.0",
+  "name": "sqts-website",
+  "version": "2.0.0",
+  "description": "SQTS Training Institute — Premium Next.js web app with Turso database and Vercel deployment",
+  "author": "Parminder-21",
   "private": true,
   "scripts": {
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "seed": "node scripts/seed-from-sqlite.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.17.2",
