@@ -1,33 +1,36 @@
-# SQTS Project 2.0
+This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
 
-A static website project showcasing courses, placed students, reviews, and detailed contact/about pages for the SQTS training institute.
+## Getting Started
 
-## 📖 Full Documentation
-Looking for technical details? Check out our comprehensive **[PROJECT DOCUMENTATION](PROJECT_DOCUMENTATION.md)** which explains the tech stack, dynamic JS injection, and deployment lifecycle in detail.
+First, run the development server:
 
-## 🚀 Live Demos
+```bash
+npm run dev
+# or
+yarn dev
+# or
+pnpm dev
+# or
+bun dev
+```
 
-We have configured two high-speed CDN deployments for this project:
-- **[Primary (Vercel)](https://sqts-2.vercel.app)**
-- **[Secondary (GitHub Pages)](https://parminder-21.github.io/SQTS_project-2.0/)**
+Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-## 📂 Project Structure
+You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
 
-- `index.html` - Main landing page.
-- `about.html` - About the institute.
-- `courses.html` - Display of available courses.
-- `contact.html` - Contact form and location.
-- `reviews.html` - Student reviews and testimonials.
-- `placed-students.html` - Showcase of alumni placements.
-- `css/` - Vanilla CSS styles.
-- `js/` - Interactive logic and dynamic data rendering.
-- `data/` - JSON files containing data that powers the dynamic sections.
+This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
 
-## 🛠️ Built With
+## Learn More
 
-- **HTML5** & **CSS3** (No frameworks)
-- **Vanilla JavaScript** (For dynamic rendering of courses, students, and tutors)
+To learn more about Next.js, take a look at the following resources:
 
-## 📡 Deployment
+- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
+- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
 
-This project utilizes CI/CD pipelines via Vercel and GitHub Actions. Pushing to the `main` GitHub branch will automatically trigger a rebuild and deploy to both the live environments shown above in seconds.
+You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+
+## Deploy on Vercel
+
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+
+Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
