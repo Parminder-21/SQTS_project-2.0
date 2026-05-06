@@ -28,8 +28,8 @@ function CountdownTimer() {
   const [timeLeft, setTimeLeft] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
 
   useEffect(() => {
-    // Demo workshop date: April 19
-    const targetDate = new Date('2026-04-19T00:00:00');
+    // Next workshop date: June 15, 2026, 10:00 AM
+    const targetDate = new Date('2026-06-15T10:00:00');
     
     const interval = setInterval(() => {
       const now = new Date();
@@ -44,6 +44,7 @@ function CountdownTimer() {
         });
       } else {
         clearInterval(interval);
+        setTimeLeft({ days: 0, hours: 0, minutes: 0, seconds: 0 });
       }
     }, 1000);
     return () => clearInterval(interval);
@@ -65,13 +66,15 @@ export default function Home() {
   const [courses, setCourses] = useState([]);
 
   useEffect(() => {
-    fetch('/api/courses')
+    fetch('/api/courses?limit=3')
       .then(res => {
         if (!res.ok) throw new Error(`API error: ${res.status}`);
         return res.json();
       })
       .then(data => {
-        if (Array.isArray(data)) setCourses(data.slice(0, 3));
+        // Handle new pagination format
+        const courseList = Array.isArray(data) ? data : data.data || [];
+        if (Array.isArray(courseList)) setCourses(courseList);
       })
       .catch(err => console.error('Failed to load courses:', err));
   }, []);

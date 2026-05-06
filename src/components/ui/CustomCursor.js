@@ -5,6 +5,10 @@ export default function CustomCursor() {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [clicked, setClicked] = useState(false);
   const [linkHovered, setLinkHovered] = useState(false);
+  const [isMobile] = useState(() => {
+    if (typeof window === 'undefined') return false;
+    return window.matchMedia('(max-width: 768px)').matches;
+  });
 
   useEffect(() => {
     const addEventListeners = () => {
@@ -49,12 +53,6 @@ export default function CustomCursor() {
       removeEventListeners();
       observer.disconnect();
     };
-  }, []);
-
-  // Use a softer touch on mobile devices (hide custom cursor if touch)
-  const [isMobile, setIsMobile] = useState(false);
-  useEffect(() => {
-    setIsMobile(window.matchMedia("(max-width: 768px)").matches);
   }, []);
 
   if (isMobile) return null;

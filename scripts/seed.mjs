@@ -60,7 +60,7 @@ async function seed() {
   `);
 
   console.log('🎓 Seeding courses...');
-  const courses = JSON.parse(fs.readFileSync(path.join(process.cwd(), '_legacy', 'data', 'courses.json'), 'utf8'));
+  const courses = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'seed', 'courses.json'), 'utf8'));
   for (const course of courses) {
     await db.execute({
       sql: 'INSERT OR IGNORE INTO courses (id, title, category, description, duration, image, icon, modules, packages) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)',
@@ -69,7 +69,7 @@ async function seed() {
   }
 
   console.log('⭐ Seeding reviews...');
-  const reviews = JSON.parse(fs.readFileSync(path.join(process.cwd(), '_legacy', 'data', 'reviews.json'), 'utf8'));
+  const reviews = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'seed', 'reviews.json'), 'utf8'));
   for (const review of reviews) {
     await db.execute({
       sql: 'INSERT INTO reviews (name, course, text, rating, image) VALUES (?, ?, ?, ?, ?)',
@@ -78,7 +78,7 @@ async function seed() {
   }
 
   console.log('👩‍🎓 Seeding students...');
-  const students = JSON.parse(fs.readFileSync(path.join(process.cwd(), '_legacy', 'data', 'students.json'), 'utf8'));
+  const students = JSON.parse(fs.readFileSync(path.join(process.cwd(), 'data', 'seed', 'students.json'), 'utf8'));
   for (const student of students) {
     await db.execute({
       sql: 'INSERT INTO students (name, role, company, salary, image) VALUES (?, ?, ?, ?, ?)',

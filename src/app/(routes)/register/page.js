@@ -6,11 +6,38 @@ export default function RegisterLogin() {
   const [isLogin, setIsLogin] = useState(false);
   const [formData, setFormData] = useState({ username: '', password: '' });
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Simulate auth action, usually integrating with NextAuth or a custom JWT endpoint.
-    alert(`${isLogin ? 'Login' : 'Registration'} submitted successfully! Redirecting...`);
-    window.location.href = '/';
+    
+    // Select endpoint
+    const endpoint = isLogin ? '/api/auth/login' : '/api/auth/register';
+    
+    try {
+      const res = await fetch(endpoint, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData)
+      });
+      
+      const data = await res.json();
+      
+      if (!res.ok) {
+        alert(data.error || 'Something went wrong');
+        return;
+      }
+      
+      alert(`${isLogin ? 'Login' : 'Registration'} submitted successfully! Redirecting...`);
+      
+      // Usually, store tokens and then redirect
+      if (data.token) {
+        localStorage.setItem('adminToken', data.token); // Reusing existing convention for simplicity
+      }
+      
+      window.location.href = '/';
+    } catch (err) {
+      console.error(err);
+      alert('Network error occurred.');
+    }
   };
 
   return (

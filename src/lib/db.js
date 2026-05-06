@@ -1,4 +1,17 @@
 import { createClient } from '@libsql/client';
+import { validateEnvironment } from './env';
+
+// Validate environment on module load
+if (typeof window === 'undefined') {
+  try {
+    validateEnvironment();
+  } catch (error) {
+    console.error('Environment validation failed:', error.message);
+    if (process.env.NODE_ENV === 'production') {
+      throw error;
+    }
+  }
+}
 
 // Singleton client instance
 let client = null;

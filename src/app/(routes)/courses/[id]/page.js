@@ -1,5 +1,6 @@
 import { dbGet } from '@/lib/db';
 import Link from 'next/link';
+import CourseViewTracker from '@/components/CourseViewTracker';
 
 export default async function CourseDetail({ params }) {
   const { id } = await params;
@@ -23,6 +24,7 @@ export default async function CourseDetail({ params }) {
 
   return (
     <div className="container" style={{ paddingTop: '120px', paddingBottom: '80px', minHeight: '100vh' }}>
+      <CourseViewTracker courseId={course.id} courseTitle={course.title} />
       <div style={{ marginBottom: '60px' }}>
         <Link href="/courses" style={{ color: '#a1a1aa', textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px', marginBottom: '20px' }}>
           ← Back to all courses

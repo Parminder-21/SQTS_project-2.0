@@ -1,0 +1,65 @@
+[
+  {
+    "id": "1",
+    "title": "Full Stack Web Development",
+    "category": "Web Development",
+    "description": "Master modern web development with React, Node.js, and databases. Learn to build production-ready applications.",
+    "duration": "12 weeks",
+    "image": "/images/courses/web-dev.jpg",
+    "icon": "⚡",
+    "modules": [
+      { "title": "HTML & CSS Fundamentals", "duration": "2 weeks" },
+      { "title": "JavaScript Basics", "duration": "2 weeks" },
+      { "title": "React & Frontend", "duration": "3 weeks" },
+      { "title": "Node.js & Backend", "duration": "3 weeks" },
+      { "title": "Databases & APIs", "duration": "2 weeks" }
+    ],
+    "packages": [
+      { "name": "Starter", "price": "$299", "features": ["Video Lessons", "2 Projects"] },
+      { "name": "Professional", "price": "$599", "features": ["Video Lessons", "5 Projects", "Job Support"] },
+      { "name": "Premium", "price": "$899", "features": ["All Features", "1-on-1 Mentoring", "Lifetime Access"] }
+    ]
+  },
+  {
+    "id": "2",
+    "title": "Data Science & Machine Learning",
+    "category": "Data Science",
+    "description": "Learn data analysis, visualization, and machine learning with Python. Build AI-powered solutions.",
+    "duration": "14 weeks",
+    "image": "/images/courses/data-science.jpg",
+    "icon": "📊",
+    "modules": [
+      { "title": "Python for Data Science", "duration": "2 weeks" },
+      { "title": "Data Analysis & Pandas", "duration": "2 weeks" },
+      { "title": "Visualization & Statistics", "duration": "2 weeks" },
+      { "title": "Machine Learning Basics", "duration": "4 weeks" },
+      { "title": "Advanced ML & Deep Learning", "duration": "4 weeks" }
+    ],
+    "packages": [
+      { "name": "Starter", "price": "$349", "features": ["Video Lessons", "Notebooks", "3 Projects"] },
+      { "name": "Professional", "price": "$649", "features": ["Video Lessons", "Notebooks", "8 Projects", "Job Support"] },
+      { "name": "Premium", "price": "$999", "features": ["All Features", "Research Papers", "Portfolio Building"] }
+    ]
+  },
+  {
+    "id": "3",
+    "title": "Digital Marketing Mastery",
+    "category": "Marketing",
+    "description": "Become an expert in SEO, SEM, social media, and content marketing. Drive real business results.",
+    "duration": "10 weeks",
+    "image": "/images/courses/digital-marketing.jpg",
+    "icon": "📈",
+    "modules": [
+      { "title": "SEO Fundamentals", "duration": "2 weeks" },
+      { "title": "PPC & Google Ads", "duration": "2 weeks" },
+      { "title": "Social Media Marketing", "duration": "2 weeks" },
+      { "title": "Content & Email Marketing", "duration": "2 weeks" },
+      { "title": "Analytics & Strategy", "duration": "2 weeks" }
+    ],
+    "packages": [
+      { "name": "Starter", "price": "$199", "features": ["Video Lessons", "2 Case Studies"] },
+      { "name": "Professional", "price": "$399", "features": ["Video Lessons", "5 Case Studies", "Job Support"] },
+      { "name": "Premium", "price": "$699", "features": ["All Features", "Live Workshops", "Certification"] }
+    ]
+  }
+]

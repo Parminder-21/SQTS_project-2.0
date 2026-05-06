@@ -1,0 +1,58 @@
+[
+  {
+    "name": "Aarav Singh",
+    "role": "Full Stack Developer",
+    "company": "Google",
+    "salary": "₹18 LPA",
+    "image": "/images/alumni/aarav.jpg"
+  },
+  {
+    "name": "Zainab Ahmed",
+    "role": "Machine Learning Engineer",
+    "company": "Amazon",
+    "salary": "₹20 LPA",
+    "image": "/images/alumni/zainab.jpg"
+  },
+  {
+    "name": "Vikram Kumar",
+    "role": "Senior Web Developer",
+    "company": "Microsoft",
+    "salary": "₹22 LPA",
+    "image": "/images/alumni/vikram.jpg"
+  },
+  {
+    "name": "Ansh Sharma",
+    "role": "Data Scientist",
+    "company": "Meta",
+    "salary": "₹19 LPA",
+    "image": "/images/alumni/ansh.jpg"
+  },
+  {
+    "name": "Pooja Desai",
+    "role": "Product Manager",
+    "company": "Apple",
+    "salary": "₹21 LPA",
+    "image": "/images/alumni/pooja.jpg"
+  },
+  {
+    "name": "Kabir Verma",
+    "role": "Backend Engineer",
+    "company": "Uber",
+    "salary": "₹17 LPA",
+    "image": "/images/alumni/kabir.jpg"
+  },
+  {
+    "name": "Divya Nair",
+    "role": "Frontend Developer",
+    "company": "Netflix",
+    "salary": "₹18 LPA",
+    "image": "/images/alumni/divya.jpg"
+  },
+  {
+    "name": "Rohan Chopra",
+    "role": "DevOps Engineer",
+    "company": "Infosys",
+    "salary": "₹16 LPA",
+    "image": "/images/alumni/rohan.jpg"
+  }
+]

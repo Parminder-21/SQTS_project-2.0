@@ -1,5 +1,6 @@
 import './globals.css';
 import { Inter } from 'next/font/google';
+import AnalyticsProvider from '@/components/AnalyticsProvider';
 import CustomCursor from '@/components/ui/CustomCursor';
 import Navbar from '@/components/ui/Navbar';
 
@@ -14,6 +15,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={inter.className}>
+        <AnalyticsProvider />
         <CustomCursor />
         <Navbar />
         <main>{children}</main>

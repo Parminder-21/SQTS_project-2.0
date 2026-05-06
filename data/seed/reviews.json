@@ -1,0 +1,37 @@
+[
+  {
+    "name": "Sarah Johnson",
+    "course": "Full Stack Web Development",
+    "text": "The course was incredibly comprehensive. I landed a job 2 months after completion. The instructors are industry experts!",
+    "rating": 5,
+    "image": "/images/reviews/sarah.jpg"
+  },
+  {
+    "name": "Rajesh Kumar",
+    "course": "Data Science & Machine Learning",
+    "text": "Excellent practical approach. The projects were real-world and helped me understand ML properly. Highly recommended!",
+    "rating": 5,
+    "image": "/images/reviews/rajesh.jpg"
+  },
+  {
+    "name": "Priya Patel",
+    "course": "Digital Marketing Mastery",
+    "text": "Great course structure with hands-on experience. I implemented the strategies immediately and saw great results.",
+    "rating": 4,
+    "image": "/images/reviews/priya.jpg"
+  },
+  {
+    "name": "Alex Chen",
+    "course": "Full Stack Web Development",
+    "text": "Best decision ever! The support from mentors was phenomenal. I'm now working as a full-stack developer at a startup.",
+    "rating": 5,
+    "image": "/images/reviews/alex.jpg"
+  },
+  {
+    "name": "Emma Wilson",
+    "course": "Data Science & Machine Learning",
+    "text": "Very well structured curriculum. The projects were challenging but doable. Worth every penny!",
+    "rating": 5,
+    "image": "/images/reviews/emma.jpg"
+  }
+]
