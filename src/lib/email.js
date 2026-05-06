@@ -55,14 +55,21 @@ export const sendEmail = async (options) => {
 
 /**
  * Send a welcome email
+ * @param {string} email - The recipient's email address
+ * @param {string} username - The display name / username
  */
 export const sendWelcomeEmail = async (email, username) => {
+  if (!email || !email.includes('@')) {
+    // username-only registrations won't have a valid email — skip silently
+    return false;
+  }
+
   return sendEmail({
     to: email,
     subject: 'Welcome to SQTS Platform!',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-        <h2 style="color: #4f46e5;">Welcome back, ${username}!</h2>
+        <h2 style="color: #4f46e5;">Welcome, ${username}!</h2>
         <p>Thank you for registering at SQTS. We're excited to have you onboard.</p>
         <p>Start exploring our premium courses and take your tech career to the next level.</p>
         <br/>

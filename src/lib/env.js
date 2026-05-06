@@ -6,18 +6,23 @@
 export function validateEnvironment() {
   const required = [
     'TURSO_DATABASE_URL',
-    'TURSO_AUTH_TOKEN'
+    'TURSO_AUTH_TOKEN',
+    'JWT_SECRET',
+    'JWT_REFRESH_SECRET',
   ];
 
   const optional = [
-    'JWT_SECRET',
-    'ADMIN_PASSWORD',
-    'NODE_ENV'
+    'ADMIN_PASSWORD_HASH',
+    'SMTP_HOST',
+    'SMTP_PORT',
+    'SMTP_USER',
+    'SMTP_PASS',
+    'SMTP_FROM',
+    'NODE_ENV',
   ];
 
   const missing = [];
 
-  // Check required variables
   for (const envVar of required) {
     if (!process.env[envVar]) {
       missing.push(envVar);
@@ -31,14 +36,12 @@ export function validateEnvironment() {
     );
   }
 
-  // Log warnings for optional variables
   for (const envVar of optional) {
     if (!process.env[envVar]) {
       console.warn(`⚠️  Optional environment variable not set: ${envVar}`);
     }
   }
 
-  // Validate NODE_ENV
   const validEnvironments = ['development', 'production', 'test'];
   const nodeEnv = process.env.NODE_ENV || 'development';
 

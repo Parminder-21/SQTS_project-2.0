@@ -2,40 +2,40 @@ import { NextResponse } from 'next/server';
 import { verifyToken } from '@/lib/auth';
 
 /**
- * Middleware to protect admin routes
+ * Proxy (formerly middleware) to protect admin routes and course mutation APIs.
+ * Renamed from middleware.js → proxy.js per Next.js 16 convention.
  */
-export function middleware(request) {
+export function proxy(request) {
   const { pathname } = request.nextUrl;
 
-  // Protected routes
+  // Protected route prefixes
   const protectedRoutes = ['/admin', '/api/courses'];
 
-  // Check if current path is protected
   const isProtected = protectedRoutes.some(route => pathname.startsWith(route));
 
   if (!isProtected) {
     return NextResponse.next();
   }
 
-  // Skip auth check for GET /api/courses (public endpoint)
-  if (pathname === '/api/courses' && request.method === 'GET') {
+  // GET /api/courses and GET /api/courses/search are public
+  if (
+    pathname.startsWith('/api/courses') &&
+    request.method === 'GET'
+  ) {
     return NextResponse.next();
   }
 
-  // Get token from headers
+  // Extract Bearer token
   const authHeader = request.headers.get('Authorization');
   const token = authHeader?.replace(/^Bearer\s+/i, '');
 
   if (!token) {
-    // For API routes, return JSON error
     if (pathname.startsWith('/api')) {
       return NextResponse.json(
         { error: 'Authorization required' },
         { status: 401 }
       );
     }
-    
-    // For pages, redirect to login
     return NextResponse.redirect(new URL('/register', request.url));
   }
 
@@ -52,16 +52,13 @@ export function middleware(request) {
     return NextResponse.redirect(new URL('/register', request.url));
   }
 
-  // Token is valid, proceed
   return NextResponse.next();
 }
 
 export const config = {
   matcher: [
-    // Protect admin routes
     '/admin/:path*',
-    // Protect courses API routes; GET /api/courses is allowed in middleware above
     '/api/courses',
-    '/api/courses/:path*'
-  ]
+    '/api/courses/:path*',
+  ],
 };

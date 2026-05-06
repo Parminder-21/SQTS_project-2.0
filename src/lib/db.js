@@ -42,11 +42,21 @@ function toPlainObject(row, columns) {
   return obj;
 }
 
-// Run a SELECT and return all rows as plain objects
+// Run a SELECT and return all rows as plain objects — with 1 retry on network error
 export async function dbAll(sql, args = []) {
   const db = getDb();
-  const result = await db.execute({ sql, args });
-  return result.rows.map(row => toPlainObject(row, result.columns));
+  try {
+    const result = await db.execute({ sql, args });
+    return result.rows.map(row => toPlainObject(row, result.columns));
+  } catch (err) {
+    // Retry once on transient network errors (ENOTFOUND, ECONNRESET, etc.)
+    if (err?.cause?.code === 'ENOTFOUND' || err?.message?.includes('ENOTFOUND') || err?.message?.includes('ECONNRESET')) {
+      await new Promise(r => setTimeout(r, 800));
+      const result = await db.execute({ sql, args });
+      return result.rows.map(row => toPlainObject(row, result.columns));
+    }
+    throw err;
+  }
 }
 
 // Run an INSERT / UPDATE / DELETE
@@ -55,12 +65,22 @@ export async function dbRun(sql, args = []) {
   return await db.execute({ sql, args });
 }
 
-// Run a SELECT and return the first row as a plain object
+// Run a SELECT and return the first row as a plain object — with 1 retry
 export async function dbGet(sql, args = []) {
   const db = getDb();
-  const result = await db.execute({ sql, args });
-  if (result.rows.length === 0) return null;
-  return toPlainObject(result.rows[0], result.columns);
+  try {
+    const result = await db.execute({ sql, args });
+    if (result.rows.length === 0) return null;
+    return toPlainObject(result.rows[0], result.columns);
+  } catch (err) {
+    if (err?.cause?.code === 'ENOTFOUND' || err?.message?.includes('ENOTFOUND') || err?.message?.includes('ECONNRESET')) {
+      await new Promise(r => setTimeout(r, 800));
+      const result = await db.execute({ sql, args });
+      if (result.rows.length === 0) return null;
+      return toPlainObject(result.rows[0], result.columns);
+    }
+    throw err;
+  }
 }
 
 // Run multiple DDL statements

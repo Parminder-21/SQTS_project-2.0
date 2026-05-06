@@ -7,225 +7,217 @@ export const dynamic = 'force-dynamic';
 
 function parseJsonArray(value) {
   if (!value) return [];
-
-  try {
-    return JSON.parse(value);
-  } catch {
-    return [];
-  }
+  try { return JSON.parse(value); } catch { return []; }
 }
 
-function normalizeSearchParams(searchParams) {
-  const params = searchParams || {};
-  const query = typeof params.q === 'string' ? params.q.trim() : '';
-  const category = typeof params.category === 'string' ? params.category.trim() : 'All';
-  const page = Math.max(1, parseInt(typeof params.page === 'string' ? params.page : '1', 10) || 1);
-  const limit = Math.min(24, Math.max(3, parseInt(typeof params.limit === 'string' ? params.limit : '9', 10) || 9));
-
-  return { query, category, page, limit };
+function normalizeSearchParams(p = {}) {
+  return {
+    query:    typeof p.q        === 'string' ? p.q.trim()        : '',
+    category: typeof p.category === 'string' ? p.category.trim() : 'All',
+    page:     Math.max(1, parseInt(p.page  || '1',  10) || 1),
+    limit:    Math.min(24, Math.max(3, parseInt(p.limit || '9', 10) || 9)),
+  };
 }
 
-function buildQueryString(filters, nextPage) {
-  const params = new URLSearchParams();
-
-  if (filters.query) {
-    params.set('q', filters.query);
-  }
-
-  if (filters.category && filters.category !== 'All') {
-    params.set('category', filters.category);
-  }
-
-  if (filters.limit !== 9) {
-    params.set('limit', String(filters.limit));
-  }
-
-  params.set('page', String(nextPage));
-
-  const queryString = params.toString();
-  return queryString ? `/courses?${queryString}` : '/courses';
+function buildQS(filters, page) {
+  const p = new URLSearchParams();
+  if (filters.query)                    p.set('q',        filters.query);
+  if (filters.category !== 'All')       p.set('category', filters.category);
+  if (filters.limit !== 9)              p.set('limit',    String(filters.limit));
+  p.set('page', String(page));
+  const qs = p.toString();
+  return qs ? `/courses?${qs}` : '/courses';
 }
+
+const CATEGORY_COLORS = {
+  'Data Science':            '#3B82F6',
+  'Web Development':         '#06B6D4',
+  'Digital Marketing':       '#8B5CF6',
+  'Artificial Intelligence': '#10B981',
+};
+function catColor(c) { return CATEGORY_COLORS[c] || '#3B82F6'; }
 
 export default async function CoursesPage({ searchParams }) {
-  const resolvedSearchParams = await searchParams;
-  const filters = normalizeSearchParams(resolvedSearchParams);
-  const offset = (filters.page - 1) * filters.limit;
+  const sp      = await searchParams;
+  const filters = normalizeSearchParams(sp);
+  const offset  = (filters.page - 1) * filters.limit;
 
   const whereParts = [];
-  const queryArgs = [];
+  const args       = [];
 
   if (filters.query) {
     whereParts.push('(title LIKE ? OR description LIKE ? OR category LIKE ?)');
-    const searchValue = `%${filters.query}%`;
-    queryArgs.push(searchValue, searchValue, searchValue);
+    const v = `%${filters.query}%`;
+    args.push(v, v, v);
   }
-
-  if (filters.category && filters.category !== 'All') {
+  if (filters.category !== 'All') {
     whereParts.push('category = ?');
-    queryArgs.push(filters.category);
+    args.push(filters.category);
   }
 
-  const whereClause = whereParts.length > 0 ? `WHERE ${whereParts.join(' AND ')}` : '';
+  const where = whereParts.length ? `WHERE ${whereParts.join(' AND ')}` : '';
 
-  const [categoryRows, countRows, rawCourses] = await Promise.all([
-    dbAll('SELECT DISTINCT category FROM courses ORDER BY category ASC'),
-    dbAll(`SELECT COUNT(*) as total FROM courses ${whereClause}`, queryArgs),
-    dbAll(`SELECT * FROM courses ${whereClause} ORDER BY title ASC LIMIT ? OFFSET ?`, [...queryArgs, filters.limit, offset])
-  ]);
+  let catRows = [], countRows = [], rawCourses = [], dbError = null;
+  try {
+    [catRows, countRows, rawCourses] = await Promise.all([
+      dbAll('SELECT DISTINCT category FROM courses ORDER BY category ASC'),
+      dbAll(`SELECT COUNT(*) as total FROM courses ${where}`, args),
+      dbAll(`SELECT * FROM courses ${where} ORDER BY title ASC LIMIT ? OFFSET ?`, [...args, filters.limit, offset]),
+    ]);
+  } catch (err) {
+    dbError = err?.message || 'Database unavailable';
+  }
 
-  const categories = ['All', ...categoryRows.map((row) => row.category).filter(Boolean)];
-  const total = countRows[0]?.total || 0;
-  const totalPages = Math.max(1, Math.ceil(total / filters.limit));
+  const categories  = ['All', ...catRows.map(r => r.category).filter(Boolean)];
+  const total       = countRows[0]?.total || 0;
+  const totalPages  = Math.max(1, Math.ceil(total / filters.limit));
+  const courses     = rawCourses.map(c => ({ ...c, modules: parseJsonArray(c.modules), packages: parseJsonArray(c.packages) }));
 
-  const courses = rawCourses.map((course) => ({
-    ...course,
-    modules: parseJsonArray(course.modules),
-    packages: parseJsonArray(course.packages)
-  }));
-
-  const paginationWindowStart = Math.max(1, Math.min(filters.page - 1, Math.max(1, totalPages - 4)));
-  const paginationWindowEnd = Math.min(totalPages, paginationWindowStart + 4);
+  const winStart = Math.max(1, Math.min(filters.page - 2, Math.max(1, totalPages - 4)));
+  const winEnd   = Math.min(totalPages, winStart + 4);
 
   return (
-    <div className="container" style={{ paddingTop: '150px', minHeight: '100vh' }}>
-      <div style={{ textAlign: 'center', marginBottom: '40px' }}>
-        <h1 className="text-gradient" style={{ fontSize: '3.5rem', marginBottom: '20px' }}>Our Programs</h1>
-        <p style={{ color: '#a1a1aa', fontSize: '1.2rem', maxWidth: '600px', margin: '0 auto' }}>
-          Explore our expert-led courses designed to make you industry-ready.
-        </p>
+    <div style={{ paddingTop: '70px', minHeight: '100vh' }}>
+
+      {/* ── Page Header ── */}
+      <div style={{ background: 'var(--bg-surface)', borderBottom: '1px solid var(--border)', padding: '48px 0 40px' }}>
+        <div className="container" style={{ textAlign: 'center' }}>
+          <span className="badge badge-blue" style={{ marginBottom: '16px', display: 'inline-flex' }}>All Programs</span>
+          <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3rem)', marginBottom: '12px' }}>
+            Our <span className="text-gradient">Courses</span>
+          </h1>
+          <p style={{ maxWidth: '520px', margin: '0 auto', fontSize: '1.05rem' }}>
+            Expert-led programs designed to make you industry-ready and placement-confident.
+          </p>
+        </div>
       </div>
 
-      <form
-        method="GET"
-        style={{
+      <div className="container" style={{ padding: '40px 24px' }}>
+
+        {/* ── Search & Filter ── */}
+        <form method="GET" style={{
           display: 'grid',
           gridTemplateColumns: 'minmax(0, 2fr) minmax(0, 1fr) auto auto',
           gap: '12px',
           alignItems: 'end',
-          marginBottom: '30px',
-          padding: '20px',
-          borderRadius: '24px',
-          background: 'rgba(15, 23, 42, 0.55)',
-          border: '1px solid rgba(255, 255, 255, 0.08)'
-        }}
-      >
-        <SearchBar defaultValue={filters.query} />
-        <CourseFilters categories={categories} selectedCategory={filters.category} selectedLimit={filters.limit} />
-      </form>
+          marginBottom: '28px',
+          padding: '20px 24px',
+          background: 'var(--bg-surface)',
+          border: '1px solid var(--border)',
+          borderRadius: 'var(--radius-lg)',
+        }}>
+          <SearchBar defaultValue={filters.query} />
+          <CourseFilters categories={categories} selectedCategory={filters.category} selectedLimit={filters.limit} />
+        </form>
 
-      <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '30px', color: '#a1a1aa', gap: '16px', flexWrap: 'wrap' }}>
-        <p style={{ margin: 0 }}>
-          Showing {courses.length} of {total} courses
-          {filters.query ? ` for "${filters.query}"` : ''}
-          {filters.category !== 'All' ? ` in ${filters.category}` : ''}
-        </p>
-        <p style={{ margin: 0 }}>Page {filters.page} of {totalPages}</p>
-      </div>
-
-      {courses.length === 0 ? (
-        <div className="glass-panel" style={{ padding: '40px', textAlign: 'center', color: '#a1a1aa' }}>
-          No courses matched your filters.
+        {/* ── Result count ── */}
+        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '28px', flexWrap: 'wrap', gap: '8px' }}>
+          <p style={{ margin: 0, fontSize: '0.9rem' }}>
+            Showing <strong style={{ color: '#F1F5F9' }}>{courses.length}</strong> of <strong style={{ color: '#F1F5F9' }}>{total}</strong> courses
+            {filters.query    ? <> for <em>"{filters.query}"</em></>    : ''}
+            {filters.category !== 'All' ? <> in <em>{filters.category}</em></> : ''}
+          </p>
+          <p style={{ margin: 0, fontSize: '0.85rem', color: 'var(--text-faint)' }}>Page {filters.page} of {totalPages}</p>
         </div>
-      ) : (
-        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '40px' }}>
-          {courses.map((course) => (
-            <div key={course.id} className="glass-panel" style={{ display: 'flex', flexDirection: 'column', padding: '30px', position: 'relative', overflow: 'hidden' }}>
-              <div style={{
-                position: 'absolute', top: 0, left: 0, right: 0, height: '5px',
-                background: 'linear-gradient(90deg, var(--primary), var(--accent))'
-              }} />
 
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '20px', gap: '12px' }}>
-                <h3 style={{ fontSize: '1.8rem', fontWeight: 'bold' }}>{course.title}</h3>
-                <span style={{ background: 'rgba(255,255,255,0.1)', padding: '5px 15px', borderRadius: '20px', fontSize: '0.8rem', color: '#fff', whiteSpace: 'nowrap' }}>
-                  {course.duration}
-                </span>
-              </div>
+        {/* ── DB Error ── */}
+        {dbError && (
+          <div className="card" style={{ padding: '40px', textAlign: 'center', borderColor: 'rgba(239,68,68,0.3)' }}>
+            <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>⚠️</div>
+            <h3 style={{ fontFamily: 'Inter, sans-serif', fontWeight: '600', marginBottom: '8px', color: '#FCA5A5' }}>Could not load courses</h3>
+            <p style={{ fontSize: '0.9rem' }}>There was a problem connecting to the database. Please try again in a moment.</p>
+          </div>
+        )}
 
-              <p style={{ color: '#a1a1aa', marginBottom: '16px', flexGrow: 1, lineHeight: '1.6' }}>
-                {course.description}
-              </p>
+        {/* ── Course Grid ── */}
+        {!dbError && courses.length === 0 ? (
+          <div className="card" style={{ padding: '60px', textAlign: 'center' }}>
+            <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🔍</div>
+            <h3 style={{ fontFamily: 'Inter, sans-serif', fontWeight: '600', marginBottom: '8px' }}>No courses found</h3>
+            <p>Try adjusting your search or filters.</p>
+          </div>
+        ) : !dbError && (
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(320px, 1fr))', gap: '28px' }}>
+            {courses.map(course => {
+              const color = catColor(course.category);
+              return (
+                <div key={course.id} className="card" style={{ display: 'flex', flexDirection: 'column', padding: '28px', position: 'relative', overflow: 'hidden' }}>
+                  {/* Accent bar */}
+                  <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '4px', background: color, borderRadius: 'var(--radius-lg) var(--radius-lg) 0 0' }} />
 
-              <span style={{ display: 'inline-flex', alignSelf: 'flex-start', marginBottom: '24px', background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', padding: '5px 12px', borderRadius: '8px', fontSize: '0.85rem' }}>
-                {course.category}
-              </span>
-
-              <div style={{ marginBottom: '30px' }}>
-                <h4 style={{ fontSize: '1rem', marginBottom: '15px', color: '#fff' }}>Key Modules:</h4>
-                <div style={{ display: 'flex', flexWrap: 'wrap', gap: '10px' }}>
-                  {course.modules.slice(0, 3).map((mod, index) => (
-                    <span key={index} style={{ background: 'rgba(99,102,241,0.15)', color: '#a5b4fc', padding: '5px 12px', borderRadius: '8px', fontSize: '0.85rem' }}>
-                      {mod.title}
+                  {/* Header row */}
+                  <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '14px', gap: '12px' }}>
+                    <span className="badge" style={{ background: `${color}20`, color }}>
+                      {course.category}
                     </span>
-                  ))}
+                    {course.duration && (
+                      <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', whiteSpace: 'nowrap', background: 'var(--bg-surface)', padding: '4px 10px', borderRadius: '999px', border: '1px solid var(--border)' }}>
+                        ⏱ {course.duration}
+                      </span>
+                    )}
+                  </div>
+
+                  <h3 style={{ fontSize: '1.15rem', fontFamily: 'Inter, sans-serif', fontWeight: '700', marginBottom: '10px', color: '#F1F5F9' }}>
+                    {course.title}
+                  </h3>
+
+                  <p style={{ fontSize: '0.88rem', lineHeight: '1.65', flexGrow: 1, marginBottom: '20px' }}>
+                    {course.description?.slice(0, 130)}{course.description?.length > 130 ? '…' : ''}
+                  </p>
+
+                  {/* Key modules */}
+                  {course.modules?.length > 0 && (
+                    <div style={{ marginBottom: '20px' }}>
+                      <p style={{ fontSize: '0.78rem', textTransform: 'uppercase', letterSpacing: '0.06em', color: 'var(--text-faint)', marginBottom: '8px' }}>Key Topics</p>
+                      <div style={{ display: 'flex', flexWrap: 'wrap', gap: '6px' }}>
+                        {course.modules.slice(0, 3).map((m, i) => (
+                          <span key={i} style={{ fontSize: '0.78rem', background: 'var(--bg-surface)', border: '1px solid var(--border)', color: 'var(--text-muted)', padding: '3px 10px', borderRadius: '999px' }}>
+                            {m.title}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <Link href={`/courses/${course.id}`} className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
+                    View Details
+                  </Link>
                 </div>
-              </div>
+              );
+            })}
+          </div>
+        )}
 
-              <Link href={`/courses/${course.id}`} className="btn-primary" style={{ width: '100%', textAlign: 'center' }}>
-                Explore Details
-              </Link>
-            </div>
-          ))}
-        </div>
-      )}
+        {/* ── Pagination ── */}
+        {totalPages > 1 && (
+          <div style={{ display: 'flex', justifyContent: 'center', gap: '8px', marginTop: '48px', flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link
+              href={buildQS(filters, Math.max(1, filters.page - 1))}
+              className={`page-btn${filters.page === 1 ? '' : ''}`}
+              style={{ opacity: filters.page === 1 ? 0.4 : 1, pointerEvents: filters.page === 1 ? 'none' : 'auto' }}
+            >
+              ← Prev
+            </Link>
 
-      {totalPages > 1 && (
-        <div style={{ display: 'flex', justifyContent: 'center', gap: '10px', marginTop: '40px', flexWrap: 'wrap' }}>
-          <Link
-            href={buildQueryString(filters, Math.max(1, filters.page - 1))}
-            aria-disabled={filters.page === 1}
-            style={{
-              pointerEvents: filters.page === 1 ? 'none' : 'auto',
-              opacity: filters.page === 1 ? 0.45 : 1,
-              padding: '10px 16px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              color: '#fff',
-              textDecoration: 'none'
-            }}
-          >
-            Previous
-          </Link>
+            {Array.from({ length: winEnd - winStart + 1 }, (_, i) => {
+              const n = winStart + i;
+              return (
+                <Link key={n} href={buildQS(filters, n)} className={`page-btn${n === filters.page ? ' active' : ''}`}>
+                  {n}
+                </Link>
+              );
+            })}
 
-          {Array.from({ length: paginationWindowEnd - paginationWindowStart + 1 }, (_, index) => {
-            const pageNumber = paginationWindowStart + index;
-            const isActive = pageNumber === filters.page;
-
-            return (
-              <Link
-                key={pageNumber}
-                href={buildQueryString(filters, pageNumber)}
-                style={{
-                  padding: '10px 16px',
-                  borderRadius: '999px',
-                  border: isActive ? '1px solid rgba(165, 180, 252, 0.6)' : '1px solid rgba(255, 255, 255, 0.12)',
-                  background: isActive ? 'rgba(99, 102, 241, 0.2)' : 'transparent',
-                  color: '#fff',
-                  textDecoration: 'none'
-                }}
-              >
-                {pageNumber}
-              </Link>
-            );
-          })}
-
-          <Link
-            href={buildQueryString(filters, Math.min(totalPages, filters.page + 1))}
-            aria-disabled={filters.page === totalPages}
-            style={{
-              pointerEvents: filters.page === totalPages ? 'none' : 'auto',
-              opacity: filters.page === totalPages ? 0.45 : 1,
-              padding: '10px 16px',
-              borderRadius: '999px',
-              border: '1px solid rgba(255, 255, 255, 0.12)',
-              color: '#fff',
-              textDecoration: 'none'
-            }}
-          >
-            Next
-          </Link>
-        </div>
-      )}
+            <Link
+              href={buildQS(filters, Math.min(totalPages, filters.page + 1))}
+              className="page-btn"
+              style={{ opacity: filters.page === totalPages ? 0.4 : 1, pointerEvents: filters.page === totalPages ? 'none' : 'auto' }}
+            >
+              Next →
+            </Link>
+          </div>
+        )}
+      </div>
     </div>
   );
 }

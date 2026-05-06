@@ -65,8 +65,8 @@ export async function POST(request) {
       logger.error('Failed to insert refresh token:', dbError.message);
     }
 
-    // Send a welcome email implicitly in the background
-    // We won't await this to keep the API response fast
+    // Send welcome email — pass username as both email and display name.
+    // If username is a valid email address it will be delivered; otherwise skipped gracefully.
     sendWelcomeEmail(username, username).catch(err => {
       logger.error('Failed invoking welcome email:', err);
     });

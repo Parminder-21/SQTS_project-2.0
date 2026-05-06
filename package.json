@@ -9,8 +9,10 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
+    "migrate": "node scripts/migrate.js",
     "seed": "node scripts/seed.mjs",
-    "seed:migrate": "node scripts/seed-from-sqlite.mjs"
+    "seed:migrate": "node scripts/seed-from-sqlite.mjs",
+    "setup": "node scripts/migrate.js && node scripts/seed.mjs"
   },
   "dependencies": {
     "@libsql/client": "^0.17.2",

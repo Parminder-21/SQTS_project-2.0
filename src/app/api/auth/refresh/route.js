@@ -1,6 +1,9 @@
 import { NextResponse } from 'next/server';
 import { verifyToken, generateToken, generateRefreshToken } from '@/lib/auth';
 import { dbRun, dbGet } from '@/lib/db';
+import { getLogger } from '@/lib/logger';
+
+const logger = getLogger('RefreshAPI');
 
 export async function POST(request) {
   try {
@@ -10,52 +13,46 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Refresh token is required' }, { status: 400 });
     }
 
-    // Verify token structure
+    // Verify token signature and expiry
     const decoded = verifyToken(refreshToken, true);
-    if (!decoded || !decoded.username) {
+    if (!decoded?.username) {
       return NextResponse.json({ error: 'Invalid or expired refresh token' }, { status: 401 });
     }
 
-    // Verify it exists in database and is not revoked
-    try {
-      const storedToken = await dbGet('SELECT * FROM refresh_tokens WHERE token = ? AND expires_at > datetime("now")', [refreshToken]);
-      
-      if (!storedToken) {
-        return NextResponse.json({ error: 'Invalid or revoked refresh token' }, { status: 401 });
-      }
+    // Verify the token exists in the DB and has not been revoked
+    // Fail closed — if the DB is unavailable we do NOT allow the refresh
+    const storedToken = await dbGet(
+      'SELECT id FROM refresh_tokens WHERE token = ? AND expires_at > datetime("now")',
+      [refreshToken]
+    );
 
-      // Delete the old refresh token (token rotation)
-      await dbRun('DELETE FROM refresh_tokens WHERE token = ?', [refreshToken]);
-    } catch (dbError) {
-      console.error('Database error during token refresh (ignoring for development):', dbError.message);
-      // Fallback: If DB fails, we still allow refresh if the signature is valid, but this should be strict in prod.
+    if (!storedToken) {
+      return NextResponse.json({ error: 'Invalid or revoked refresh token' }, { status: 401 });
     }
 
-    // Generate new tokens
-    const payload = { username: decoded.username, role: decoded.role || 'admin' };
+    // Rotate: delete old token, issue new pair
+    await dbRun('DELETE FROM refresh_tokens WHERE token = ?', [refreshToken]);
+
+    const payload = { username: decoded.username, role: decoded.role || 'user' };
     const newToken = generateToken(payload);
     const newRefreshToken = generateRefreshToken(payload);
 
-    // Calculate expiry 7 days from now
     const expiresAt = new Date();
     expiresAt.setDate(expiresAt.getDate() + 7);
-    
-    // Store new refresh token
-    try {
-      await dbRun(
-        'INSERT INTO refresh_tokens (token, username, expires_at) VALUES (?, ?, ?)',
-        [newRefreshToken, decoded.username, expiresAt.toISOString()]
-      );
-    } catch (dbError) {
-      console.error('Database error saving new refresh token:', dbError.message);
-    }
+
+    await dbRun(
+      'INSERT INTO refresh_tokens (token, username, expires_at) VALUES (?, ?, ?)',
+      [newRefreshToken, decoded.username, expiresAt.toISOString()]
+    );
+
+    logger.info(`Token refreshed for user "${decoded.username}"`);
 
     return NextResponse.json({
       token: newToken,
       refreshToken: newRefreshToken,
     });
   } catch (error) {
-    console.error('Token refresh error:', error);
+    logger.error('Token refresh error:', error);
     return NextResponse.json(
       { error: 'Internal server error' },
       { status: 500 }

@@ -94,7 +94,7 @@ export async function DELETE(request, { params }) {
       message: 'Course deleted successfully' 
     });
   } catch (error) {
-    console.error('Delete course error:', error);
+    logger.error('Delete course error:', error);
     return errorResponse('Failed to delete course', 500);
   }
 }

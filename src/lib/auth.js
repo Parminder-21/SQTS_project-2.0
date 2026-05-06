@@ -1,8 +1,17 @@
 import jwt from 'jsonwebtoken';
 import bcryptjs from 'bcryptjs';
 
-const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key-change-in-production';
-const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Should be hashed in production
+function getJwtSecret() {
+  const secret = process.env.JWT_SECRET;
+  if (!secret) throw new Error('JWT_SECRET environment variable is not set.');
+  return secret;
+}
+
+function getJwtRefreshSecret() {
+  const secret = process.env.JWT_REFRESH_SECRET;
+  if (!secret) throw new Error('JWT_REFRESH_SECRET environment variable is not set.');
+  return secret;
+}
 
 /**
  * Verify JWT token
@@ -10,33 +19,35 @@ const ADMIN_PASSWORD = process.env.ADMIN_PASSWORD || 'admin123'; // Should be ha
 export function verifyToken(token, isRefresh = false) {
   try {
     if (!token) return null;
-    
+
     // Remove Bearer prefix if present
     const cleanToken = token.replace(/^Bearer\s+/i, '');
-    const secret = isRefresh ? (process.env.JWT_REFRESH_SECRET || JWT_SECRET + '_refresh') : JWT_SECRET;
+    const secret = isRefresh ? getJwtRefreshSecret() : getJwtSecret();
     return jwt.verify(cleanToken, secret);
   } catch (error) {
-    console.error('Token verification failed:', error.message);
+    // Only log unexpected errors, not normal expiry/invalid signature
+    if (!['JsonWebTokenError', 'TokenExpiredError', 'NotBeforeError'].includes(error.name)) {
+      console.error('Token verification failed:', error.message);
+    }
     return null;
   }
 }
 
 /**
- * Generate JWT token
+ * Generate JWT access token (24h)
  */
 export function generateToken(payload) {
-  return jwt.sign(payload, JWT_SECRET, {
+  return jwt.sign(payload, getJwtSecret(), {
     expiresIn: '24h',
     algorithm: 'HS256'
   });
 }
 
 /**
- * Generate Refresh token
+ * Generate JWT refresh token (7d)
  */
 export function generateRefreshToken(payload) {
-  const secret = process.env.JWT_REFRESH_SECRET || JWT_SECRET + '_refresh';
-  return jwt.sign(payload, secret, {
+  return jwt.sign(payload, getJwtRefreshSecret(), {
     expiresIn: '7d',
     algorithm: 'HS256'
   });
@@ -46,7 +57,7 @@ export function generateRefreshToken(payload) {
  * Hash password
  */
 export async function hashPassword(password) {
-  return await bcryptjs.hash(password, 10);
+  return await bcryptjs.hash(password, 12);
 }
 
 /**
@@ -57,18 +68,21 @@ export async function comparePassword(password, hash) {
 }
 
 /**
- * Verify admin credentials
+ * Verify admin credentials against the database
  */
 export async function verifyAdminCredentials(username, password) {
-  // In production, fetch from database with hashed password
-  // For now, simple verification
-  if (username !== 'admin') return false;
-  
-  const hashedAdminPassword = process.env.ADMIN_PASSWORD_HASH || 
-    '$2a$10$YjcBNzr4d8D8xvXS8bKVOuHhYi5QbYOyqq4yE5OW8gW5N4kzE4v4m'; // bcrypt hash of 'admin123'
-  
+  // Dynamically import to avoid circular deps at module load time
+  const { dbGet } = await import('./db.js');
+
+  const user = await dbGet(
+    'SELECT password, role FROM users WHERE username = ? AND role = ?',
+    [username, 'admin']
+  );
+
+  if (!user) return false;
+
   try {
-    return await comparePassword(password, hashedAdminPassword);
+    return await comparePassword(password, user.password);
   } catch (error) {
     console.error('Password comparison failed:', error);
     return false;
@@ -76,32 +90,30 @@ export async function verifyAdminCredentials(username, password) {
 }
 
 /**
- * Extract token from request headers
+ * Extract token from request Authorization header
  */
 export function getTokenFromRequest(request) {
   const authHeader = request.headers.get('Authorization');
   if (!authHeader) return null;
-  
   return authHeader.replace(/^Bearer\s+/i, '');
 }
 
 /**
- * Check if request is authorized (has valid admin token)
+ * Check if request carries a valid admin token
  */
 export async function isAuthorized(request) {
   const token = getTokenFromRequest(request);
   const decoded = verifyToken(token);
-  
   return decoded && decoded.role === 'admin';
 }
 
 /**
- * Create unauthorized response
+ * Create a 401 Unauthorized JSON response
  */
 export function unauthorizedResponse(message = 'Unauthorized') {
   return new Response(
     JSON.stringify({ error: message }),
-    { 
+    {
       status: 401,
       headers: { 'Content-Type': 'application/json' }
     }
