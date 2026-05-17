@@ -28,7 +28,7 @@ export default function Footer() {
               </span>
             </div>
             <p style={{ fontSize: '0.88rem', lineHeight: '1.6', maxWidth: '220px' }}>
-              Sparkque Tech Solutions — empowering careers through industry-focused tech education.
+              SQTS Training Institute — practical tech education with placement support for students at every stage.
             </p>
           </div>
 
@@ -36,19 +36,31 @@ export default function Footer() {
           <div>
             <h4 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8', marginBottom: '16px' }}>Programs</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {['Data Science', 'Web Development', 'Digital Marketing', 'Artificial Intelligence'].map(p => (
-                <Link key={p} href="/courses" className="footer-link">
-                  {p}
-                </Link>
+              {[
+                ['School Coaching',    '/courses?category=School+Coaching'],
+                ['Programming',        '/courses?category=Programming'],
+                ['Web Development',    '/courses?category=Web+Development'],
+                ['AI & Future Tech',   '/courses?category=Artificial+Intelligence'],
+                ['Internship Programs','/register?type=internship'],
+                ['Graphic Design',     '/courses?category=Digital+Marketing'],
+              ].map(([label, href]) => (
+                <Link key={label} href={href} className="footer-link">{label}</Link>
               ))}
             </div>
           </div>
 
-          {/* Company */}
+          {/* Quick Links */}
           <div>
-            <h4 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8', marginBottom: '16px' }}>Company</h4>
+            <h4 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8', marginBottom: '16px' }}>Quick Links</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px' }}>
-              {[['About Us', '/'], ['Our Courses', '/courses'], ['Alumni', '/alumni'], ['Register', '/register']].map(([label, href]) => (
+              {[
+                ['Home',        '/'],
+                ['All Courses', '/courses'],
+                ['Alumni',      '/alumni'],
+                ['Internships', '/register?type=internship'],
+                ['Free Demo',   '/register?type=demo'],
+                ['Register',    '/register'],
+              ].map(([label, href]) => (
                 <Link key={label} href={href} style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>
                   {label}
                 </Link>

@@ -7,8 +7,8 @@ import Footer from '@/components/ui/Footer';
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata = {
-  title: 'SQTS — Sparkque Tech Solutions | Premium Tech Training',
-  description: 'Job-focused tech courses with guaranteed placement assistance. Data Science, Web Development, Digital Marketing, and AI programs in India.',
+  title: 'SQTS Training Institute | School Coaching, Programming, Web Dev, Internships & Placement',
+  description: 'SQTS Training Institute — practical tech education for school students, college learners, job seekers and internship aspirants. Placement assistance, live projects, and 50+ internship domains.',
 };
 
 export default function RootLayout({ children }) {

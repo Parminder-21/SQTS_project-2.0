@@ -1,16 +1,48 @@
 'use client';
-import { useState } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import { useSearchParams } from 'next/navigation';
 
-export default function RegisterLogin() {
-  const [isLogin, setIsLogin]               = useState(false);
-  const [formData, setFormData]             = useState({ username: '', password: '' });
-  const [twoFaCode, setTwoFaCode]           = useState('');
+/* ── Type config — maps ?type= param to UI copy ── */
+const TYPE_CONFIG = {
+  internship: {
+    badge:    'Internship Application',
+    title:    'Apply for Internship',
+    subtitle: '50+ domains available. Real work experience with a verified certificate.',
+    cta:      'Submit Application',
+  },
+  demo: {
+    badge:    'Free Demo Class',
+    title:    'Book Your Free Demo',
+    subtitle: 'Experience our teaching style before you commit. No payment required.',
+    cta:      'Book Demo Class',
+  },
+  placement: {
+    badge:    'Placement Prep',
+    title:    'Start Placement Training',
+    subtitle: 'Resume building, mock interviews, and direct placement assistance.',
+    cta:      'Start Placement Prep',
+  },
+};
+
+function RegisterContent() {
+  const searchParams = useSearchParams();
+  const typeParam    = searchParams.get('type');
+  const typeConfig   = TYPE_CONFIG[typeParam] || null;
+
+  const [isLogin, setIsLogin]                 = useState(false);
+  const [formData, setFormData]               = useState({ username: '', password: '' });
+  const [twoFaCode, setTwoFaCode]             = useState('');
   const [pendingUsername, setPendingUsername] = useState(null);
-  const [loading, setLoading]               = useState(false);
-  const [error, setError]                   = useState('');
-  const [success, setSuccess]               = useState('');
+  const [loading, setLoading]                 = useState(false);
+  const [error, setError]                     = useState('');
+  const [success, setSuccess]                 = useState('');
+
+  // If a type param is present, default to register mode
+  useEffect(() => {
+    if (typeParam && !isLogin) setIsLogin(false);
+  }, [typeParam]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -58,7 +90,7 @@ export default function RegisterLogin() {
   /* ── 2FA step ── */
   if (pendingUsername) {
     return (
-      <AuthLayout title="Two-Factor Auth" subtitle="Enter the 6-digit code from your authenticator app.">
+      <AuthLayout badge="Security Check" title="Two-Factor Auth" subtitle="Enter the 6-digit code from your authenticator app.">
         {error   && <div className="alert-error"   style={{ marginBottom: '20px' }}>{error}</div>}
         {success && <div className="alert-success" style={{ marginBottom: '20px' }}>{success}</div>}
         <form onSubmit={handle2FA} style={{ display: 'flex', flexDirection: 'column', gap: '20px' }}>
@@ -67,8 +99,7 @@ export default function RegisterLogin() {
             <input
               required type="text" inputMode="numeric" pattern="[0-9]{6}" maxLength={6}
               value={twoFaCode} onChange={e => setTwoFaCode(e.target.value.replace(/\D/g, ''))}
-              placeholder="000000"
-              className="input"
+              placeholder="000000" className="input"
               style={{ letterSpacing: '0.4em', textAlign: 'center', fontSize: '1.5rem', fontWeight: '700' }}
             />
           </div>
@@ -84,14 +115,31 @@ export default function RegisterLogin() {
     );
   }
 
-  /* ── Main form ── */
+  /* ── Determine title/subtitle/badge ── */
+  const badge    = typeConfig?.badge    || (isLogin ? 'Welcome Back'    : 'Get Started');
+  const title    = typeConfig?.title    || (isLogin ? 'Sign In'         : 'Create Account');
+  const subtitle = typeConfig?.subtitle || (isLogin ? 'Sign in to access your courses and dashboard.' : 'Join 500+ students building their tech careers.');
+  const ctaLabel = typeConfig?.cta      || (isLogin ? 'Sign In'         : 'Create Account');
+
   return (
-    <AuthLayout
-      title={isLogin ? 'Welcome Back' : 'Create Account'}
-      subtitle={isLogin ? 'Sign in to access your courses and dashboard.' : 'Join 500+ students building their tech careers.'}
-    >
+    <AuthLayout badge={badge} title={title} subtitle={subtitle}>
       {error   && <div className="alert-error"   style={{ marginBottom: '20px' }}>{error}</div>}
       {success && <div className="alert-success" style={{ marginBottom: '20px' }}>{success}</div>}
+
+      {/* Type-specific info banner */}
+      {typeConfig && !isLogin && (
+        <div style={{
+          background: 'var(--primary-dim)',
+          border: '1px solid rgba(37,99,235,0.25)',
+          borderRadius: 'var(--radius-sm)',
+          padding: '12px 16px',
+          marginBottom: '20px',
+          fontSize: '0.85rem',
+          color: '#93C5FD',
+        }}>
+          Create a free account to complete your {typeParam} application. Takes 30 seconds.
+        </div>
+      )}
 
       <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '18px' }}>
         <div>
@@ -108,9 +156,7 @@ export default function RegisterLogin() {
           {!isLogin && <p style={{ fontSize: '0.78rem', color: 'var(--text-faint)', marginTop: '6px' }}>Minimum 6 characters</p>}
         </div>
         <button type="submit" className="btn-primary" style={{ width: '100%', padding: '14px', fontSize: '1rem', marginTop: '4px' }} disabled={loading}>
-          {loading
-            ? (isLogin ? 'Signing in…' : 'Creating account…')
-            : (isLogin ? 'Sign In'     : 'Create Account')}
+          {loading ? (isLogin ? 'Signing in…' : 'Creating account…') : ctaLabel}
         </button>
       </form>
 
@@ -128,7 +174,7 @@ export default function RegisterLogin() {
 }
 
 /* ── Shared auth layout wrapper ── */
-function AuthLayout({ title, subtitle, children }) {
+function AuthLayout({ badge, title, subtitle, children }) {
   return (
     <div style={{ paddingTop: '70px', minHeight: '100vh', background: 'var(--bg)', display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '100px 24px 60px' }}>
       <motion.div
@@ -138,16 +184,21 @@ function AuthLayout({ title, subtitle, children }) {
         style={{ width: '100%', maxWidth: '460px' }}
       >
         {/* Logo */}
-        <div style={{ textAlign: 'center', marginBottom: '32px' }}>
+        <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
             <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Playfair Display, serif', fontWeight: '700', fontSize: '1.1rem', color: '#fff' }}>S</div>
             <span style={{ fontFamily: 'Playfair Display, serif', fontWeight: '700', fontSize: '1.3rem', color: '#F1F5F9' }}>SQTS</span>
           </Link>
         </div>
 
-        <div className="card" style={{ padding: '40px' }}>
-          <h1 style={{ fontSize: '1.7rem', textAlign: 'center', marginBottom: '8px' }}>{title}</h1>
-          <p style={{ textAlign: 'center', fontSize: '0.9rem', marginBottom: '28px' }}>{subtitle}</p>
+        <div className="card" style={{ padding: '36px 40px' }}>
+          {badge && (
+            <div style={{ textAlign: 'center', marginBottom: '16px' }}>
+              <span className="badge badge-blue">{badge}</span>
+            </div>
+          )}
+          <h1 style={{ fontSize: '1.6rem', textAlign: 'center', marginBottom: '8px' }}>{title}</h1>
+          <p style={{ textAlign: 'center', fontSize: '0.88rem', marginBottom: '24px', lineHeight: '1.6' }}>{subtitle}</p>
           {children}
         </div>
       </motion.div>
@@ -162,5 +213,19 @@ function AuthLayout({ title, subtitle, children }) {
         }
       `}</style>
     </div>
+  );
+}
+
+/* ── Page export wrapped in Suspense for useSearchParams ── */
+export default function RegisterPage() {
+  return (
+    <Suspense fallback={
+      <div style={{ paddingTop: '70px', minHeight: '100vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+        <div style={{ width: '32px', height: '32px', border: '3px solid var(--border)', borderTopColor: 'var(--primary)', borderRadius: '50%', animation: 'spin 0.8s linear infinite' }} />
+        <style>{`@keyframes spin { to { transform: rotate(360deg); } }`}</style>
+      </div>
+    }>
+      <RegisterContent />
+    </Suspense>
   );
 }

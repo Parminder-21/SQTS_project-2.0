@@ -88,6 +88,14 @@ a { color: inherit; }
   background-clip: text;
 }
 
+/* Soft white-to-muted gradient — used in alumni and legacy components */
+.text-gradient-soft {
+  background: linear-gradient(90deg, #F1F5F9, #94A3B8);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
 /* ─── Cards ──────────────────────────────────────────────────────────────────── */
 .card {
   background: var(--bg-card);
