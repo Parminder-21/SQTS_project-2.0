@@ -2,6 +2,7 @@
 import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
+import Icon from '@/components/ui/Icon';
 
 export default function StudentDashboard() {
   const [token, setToken] = useState(null);
@@ -154,13 +155,13 @@ export default function StudentDashboard() {
               gap: '16px'
             }}>
               {[
-                { title: 'Applied Courses', value: enquiries.length, icon: '📚', color: '#3B82F6' },
-                { title: 'Pending Demos', value: enquiries.filter(e => e.course.toLowerCase().includes('demo')).length, icon: '📅', color: '#10B981' },
-                { title: 'Certificates Verifiable', value: 0, icon: '🏆', color: '#8B5CF6' }
+                { title: 'Applied Courses', value: enquiries.length, icon: 'school', color: '#3B82F6' },
+                { title: 'Pending Demos', value: enquiries.filter(e => e.course.toLowerCase().includes('demo')).length, icon: 'calendar', color: '#10B981' },
+                { title: 'Certificates Verifiable', value: 0, icon: 'graduation', color: '#8B5CF6' }
               ].map((stat, i) => (
                 <div key={i} className="card" style={{ padding: '24px', display: 'flex', alignItems: 'center', gap: '16px' }}>
-                  <div style={{ fontSize: '2rem', padding: '10px', background: `${stat.color}15`, borderRadius: '12px' }}>
-                    {stat.icon}
+                  <div style={{ padding: '10px', background: `${stat.color}15`, borderRadius: '12px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <Icon name={stat.icon} color={stat.color} size={28} />
                   </div>
                   <div>
                     <h3 style={{ fontSize: '1.8rem', margin: 0, fontWeight: '700' }}>{stat.value}</h3>
@@ -183,7 +184,9 @@ export default function StudentDashboard() {
 
               {enquiries.length === 0 ? (
                 <div style={{ textAlign: 'center', padding: '48px 24px', background: 'rgba(255,255,255,0.02)', borderRadius: '12px', border: '1px dashed var(--border)' }}>
-                  <div style={{ fontSize: '2.5rem', marginBottom: '12px' }}>🚀</div>
+                  <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '12px' }}>
+                    <Icon name="rocket" color="var(--primary)" size={40} />
+                  </div>
                   <h3 style={{ fontSize: '1rem', marginBottom: '6px' }}>No active applications found</h3>
                   <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', maxWidth: '320px', margin: '0 auto 20px' }}>
                     You haven&apos;t booked a class or demo yet. Enroll in a course to kickstart your journey.
@@ -224,7 +227,7 @@ export default function StudentDashboard() {
                             {app.course}
                           </h3>
                           <p style={{ fontSize: '0.82rem', color: 'var(--text-muted)', margin: 0 }}>
-                            📍 {app.city} &bull; 📧 {app.email}
+                            Location: {app.city} &bull; Email: {app.email}
                           </p>
                         </div>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
@@ -237,7 +240,7 @@ export default function StudentDashboard() {
                             borderRadius: '999px',
                             border: '1px solid rgba(245,158,11,0.2)'
                           }}>
-                            ⏳ Processing
+                            Processing
                           </span>
                         </div>
                       </div>
@@ -254,15 +257,17 @@ export default function StudentDashboard() {
             
             {/* PREMIUM RESOURCES */}
             <section className="card" style={{ padding: '24px' }}>
-              <h3 style={{ fontSize: '1rem', marginBottom: '16px', color: '#F1F5F9' }}>💡 Placement Prep Pack</h3>
+              <h3 style={{ fontSize: '1rem', marginBottom: '16px', color: '#F1F5F9', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                <Icon name="target" size={16} color="var(--primary-light)" animate={false} /> Placement Prep Pack
+              </h3>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px', lineHeight: '1.5' }}>
                 Exclusive study documents and guides ready for download to kickstart your preparation.
               </p>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {[
-                  { name: 'Interview Prep Sheet.pdf', size: '2.4 MB', icon: '📄' },
-                  { name: 'Resume Template.docx', size: '1.1 MB', icon: '📝' },
-                  { name: 'C / Python Guidebook.pdf', size: '4.8 MB', icon: '📚' }
+                  { name: 'Interview Prep Sheet.pdf', size: '2.4 MB', icon: 'file' },
+                  { name: 'Resume Template.docx', size: '1.1 MB', icon: 'file' },
+                  { name: 'C / Python Guidebook.pdf', size: '4.8 MB', icon: 'school' }
                 ].map((res, i) => (
                   <div 
                     key={i} 
@@ -279,13 +284,13 @@ export default function StudentDashboard() {
                     onClick={() => alert(`Downloading ${res.name}...`)}
                   >
                     <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
-                      <span style={{ fontSize: '1.2rem' }}>{res.icon}</span>
+                      <Icon name={res.icon} color="var(--primary-light)" size={20} />
                       <div>
                         <div style={{ fontSize: '0.8rem', fontWeight: '600', color: '#E2E8F0' }}>{res.name}</div>
                         <div style={{ fontSize: '0.7rem', color: 'var(--text-faint)' }}>{res.size}</div>
                       </div>
                     </div>
-                    <span style={{ fontSize: '0.8rem', color: 'var(--primary-light)' }}>⬇️</span>
+                    <span style={{ fontSize: '0.78rem', color: 'var(--primary-light)', fontWeight: '600' }}>Get</span>
                   </div>
                 ))}
               </div>
@@ -298,7 +303,7 @@ export default function StudentDashboard() {
               border: '1px solid rgba(37,211,102,0.2)'
             }}>
               <h3 style={{ fontSize: '1rem', marginBottom: '12px', color: '#F1F5F9', display: 'flex', alignItems: 'center', gap: '8px' }}>
-                💬 Counselor Support
+                <Icon name="message" size={18} color="#25D366" animate={false} /> Counselor Support
               </h3>
               <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '20px', lineHeight: '1.5' }}>
                 Need help choosing a course, scheduling your classes, or getting internship guidance? Contact your advisor.

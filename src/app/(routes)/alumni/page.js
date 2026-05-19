@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import { GraduationCap } from 'lucide-react';
 
 export const dynamic = 'force-dynamic';
 
@@ -36,7 +37,9 @@ export default async function AlumniPage() {
 
         {students.length === 0 ? (
           <div className="card" style={{ padding: '60px', textAlign: 'center' }}>
-            <div style={{ fontSize: '3rem', marginBottom: '16px' }}>🎓</div>
+            <div style={{ color: 'var(--accent)', marginBottom: '20px', display: 'flex', justifyContent: 'center' }}>
+              <GraduationCap size={44} strokeWidth={1.5} />
+            </div>
             <h3 style={{ fontFamily: 'Inter, sans-serif', fontWeight: '600', marginBottom: '8px' }}>
               Alumni stories coming soon
             </h3>

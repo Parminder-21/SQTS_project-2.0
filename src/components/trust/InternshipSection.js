@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { INTERNSHIP_DOMAINS, INTERNSHIP_FEATURES } from '@/data/trust';
+import Icon from '@/components/ui/Icon';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 20 },
@@ -59,9 +60,8 @@ export default function InternshipSection() {
                   background: 'rgba(16,185,129,0.12)',
                   borderRadius: '10px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1.1rem',
                 }}>
-                  {icon}
+                  <Icon name={icon} color="#10B981" size={18} />
                 </div>
                 <div>
                   <h4 style={{ fontSize: '0.9rem', marginBottom: '4px', color: '#F1F5F9' }}>{title}</h4>
@@ -97,7 +97,15 @@ export default function InternshipSection() {
                     borderRadius: 'var(--radius-sm)',
                   }}
                 >
-                  <span style={{ fontSize: '1.1rem', flexShrink: 0 }}>{icon}</span>
+                  <div style={{
+                    width: '32px', height: '32px',
+                    background: `${color}14`,
+                    borderRadius: '8px',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <Icon name={icon} color={color} size={16} />
+                  </div>
                   <div style={{ flex: 1, minWidth: 0 }}>
                     <p style={{
                       fontSize: '0.8rem', fontWeight: '600',

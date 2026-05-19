@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PLACEMENTS } from '@/data/trust';
+import Icon from '@/components/ui/Icon';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
@@ -125,8 +126,8 @@ export default function PlacementSection() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span className="badge badge-green" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-              🎯 Placement Success
+            <span className="badge badge-green" style={{ marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name="target" size={14} animate={false} /> Placement Success
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.7rem)', marginBottom: '14px' }}>
               Our Students Are{' '}

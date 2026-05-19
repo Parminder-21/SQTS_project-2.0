@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FAQS } from '@/data/trust';
+import Icon from '@/components/ui/Icon';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
@@ -9,12 +10,12 @@ const fadeUp = {
 };
 
 const CATEGORY_ICONS = {
-  'Fees & Payment':    '💰',
-  'Demo Class':        '🎓',
-  'Internship':        '🚀',
-  'Placement Support': '🤝',
-  'Who Can Join':      '👥',
-  'Certification':     '🏆',
+  'Fees & Payment':    'card',
+  'Demo Class':        'graduation',
+  'Internship':        'rocket',
+  'Placement Support': 'handshake',
+  'Who Can Join':      'users',
+  'Certification':     'trophy',
 };
 
 function FAQItem({ q, a, isOpen, onToggle }) {
@@ -103,8 +104,8 @@ export default function FAQSection() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span className="badge badge-blue" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-              ❓ FAQ
+            <span className="badge badge-blue" style={{ marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name="help" size={14} animate={false} /> FAQ
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.7rem)', marginBottom: '14px' }}>
               Questions We Get{' '}
@@ -146,9 +147,10 @@ export default function FAQSection() {
                   color: activeCategory === cat ? '#93C5FD' : 'var(--text-muted)',
                   fontSize: '0.82rem', fontWeight: '600',
                   cursor: 'pointer', transition: 'all 0.2s ease',
+                  display: 'inline-flex', alignItems: 'center', gap: '6px',
                 }}
               >
-                {CATEGORY_ICONS[cat] || '•'} {cat}
+                {CATEGORY_ICONS[cat] ? <Icon name={CATEGORY_ICONS[cat]} size={14} animate={false} /> : '•'} {cat}
               </button>
             ))}
           </motion.div>
@@ -170,9 +172,13 @@ export default function FAQSection() {
                     display: 'flex', alignItems: 'center', gap: '10px',
                     marginBottom: '16px',
                   }}>
-                    <span style={{ fontSize: '1.1rem' }}>{CATEGORY_ICONS[category] || '•'}</span>
+                    {CATEGORY_ICONS[category] ? (
+                      <Icon name={CATEGORY_ICONS[category]} size={20} color="#93C5FD" animate={false} />
+                    ) : (
+                      <span style={{ fontSize: '1.1rem' }}>•</span>
+                    )}
                     <h3 style={{
-                      fontSize: '1rem', color: '#94A3B8',
+                      fontSize: '1rem', color: '#F1F5F9',
                       fontFamily: 'Inter, sans-serif', fontWeight: '700',
                     }}>
                       {category}

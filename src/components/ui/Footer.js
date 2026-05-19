@@ -73,9 +73,9 @@ export default function Footer() {
           <div>
             <h4 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8', marginBottom: '16px' }}>Contact</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              <span>📧 info@shreebalaji.in</span>
-              <span>📞 +91 98765 43210</span>
-              <span>📍 Chandigarh, India</span>
+              <span>Email: info@shreebalaji.in</span>
+              <span>Phone: +91 98765 43210</span>
+              <span>Location: Chandigarh, India</span>
             </div>
           </div>
         </div>

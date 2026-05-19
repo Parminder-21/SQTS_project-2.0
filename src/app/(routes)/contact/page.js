@@ -5,12 +5,13 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import EnquiryForm from '@/components/contact/EnquiryForm';
 import FreeDemoSection from '@/components/contact/FreeDemoSection';
+import Icon from '@/components/ui/Icon';
 
 /* ─── Page metadata is set in layout, but we add extra via head tag ─────── */
 
 const CONTACT_CHANNELS = [
   {
-    icon: '📞',
+    icon: 'phone',
     label: 'Call Us',
     value: '+91 98765 43210',
     href: 'tel:+919876543210',
@@ -18,7 +19,7 @@ const CONTACT_CHANNELS = [
     color: '#3B82F6',
   },
   {
-    icon: '💬',
+    icon: 'message',
     label: 'WhatsApp',
     value: 'Chat Instantly',
     href: 'https://wa.me/919876543210?text=Hi%2C%20I%20found%20Shree Balaji%20online%20and%20want%20to%20know%20more.',
@@ -26,7 +27,7 @@ const CONTACT_CHANNELS = [
     color: '#25D366',
   },
   {
-    icon: '📧',
+    icon: 'mail',
     label: 'Email',
     value: 'info@shreebalaji.in',
     href: 'mailto:info@shreebalaji.in',
@@ -34,7 +35,7 @@ const CONTACT_CHANNELS = [
     color: '#06B6D4',
   },
   {
-    icon: '📍',
+    icon: 'map_pin',
     label: 'Visit Us',
     value: 'Chandigarh Campus',
     href: 'https://maps.google.com/?q=Chandigarh,India',
@@ -44,10 +45,10 @@ const CONTACT_CHANNELS = [
 ];
 
 const CTA_BLOCKS = [
-  { id: 'cta-demo',       href: '/contact?type=demo',        icon: '🎓', label: 'Book Free Demo',       desc: 'Try before you commit', bg: '#2563EB' },
-  { id: 'cta-counsellor', href: 'https://wa.me/919876543210', icon: '🤝', label: 'Talk to Counsellor',   desc: 'Get personalised guidance', bg: '#25D366', external: true },
-  { id: 'cta-internship', href: '/contact?type=internship',  icon: '💼', label: 'Apply for Internship', desc: '50+ domains available', bg: '#7C3AED' },
-  { id: 'cta-enroll',     href: '/register',                 icon: '🚀', label: 'Enroll Now',           desc: 'Start your journey today', bg: '#059669' },
+  { id: 'cta-demo',       href: '/contact?type=demo',        icon: 'graduation', label: 'Book Free Demo',       desc: 'Try before you commit', bg: '#2563EB' },
+  { id: 'cta-counsellor', href: 'https://wa.me/919876543210', icon: 'handshake', label: 'Talk to Counsellor',   desc: 'Get personalised guidance', bg: '#25D366', external: true },
+  { id: 'cta-internship', href: '/contact?type=internship',  icon: 'briefcase', label: 'Apply for Internship', desc: '50+ domains available', bg: '#7C3AED' },
+  { id: 'cta-enroll',     href: '/register',                 icon: 'rocket', label: 'Enroll Now',           desc: 'Start your journey today', bg: '#059669' },
 ];
 
 function ContactPageContent() {
@@ -66,8 +67,8 @@ function ContactPageContent() {
             transition={{ duration: 0.6 }}
             style={{ maxWidth: '640px' }}
           >
-            <span className="badge badge-blue" style={{ marginBottom: '20px' }}>
-              📬 Get in Touch
+            <span className="badge badge-blue" style={{ marginBottom: '20px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name="📬" size={14} animate={false} /> Get in Touch
             </span>
             <h1 style={{ fontSize: 'clamp(2rem, 5vw, 3.2rem)', marginBottom: '16px' }}>
               Have Questions?<br />
@@ -115,7 +116,7 @@ function ContactPageContent() {
                 style={{ textDecoration: 'none' }}
               >
                 <div className="contact-channel-icon" style={{ background: `${color}20`, borderColor: `${color}35`, color }}>
-                  {icon}
+                  <Icon name={icon} color={color} size={20} />
                 </div>
                 <div>
                   <div style={{ fontSize: '0.75rem', textTransform: 'uppercase', letterSpacing: '0.07em', color: 'var(--text-muted)', fontWeight: '600', marginBottom: '3px' }}>{label}</div>
@@ -142,7 +143,9 @@ function ContactPageContent() {
                 className="cta-block"
                 style={{ '--cta-color': bg }}
               >
-                <span className="cta-block-icon" aria-hidden="true">{icon}</span>
+                <span className="cta-block-icon" aria-hidden="true" style={{ color: bg }}>
+                  <Icon name={icon} size={24} color={bg} />
+                </span>
                 <strong className="cta-block-label">{label}</strong>
                 <span className="cta-block-desc">{desc}</span>
               </Link>
@@ -161,8 +164,9 @@ function ContactPageContent() {
             viewport={{ once: true }}
             style={{ textAlign: 'center', marginBottom: '48px' }}
           >
-            <span className="badge badge-blue" style={{ marginBottom: '14px' }}>
-              {type === 'demo' ? '🎓 Book Demo' : type === 'internship' ? '💼 Internship' : '📋 Enquiry Form'}
+            <span className="badge badge-blue" style={{ marginBottom: '14px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name={type === 'demo' ? '🎓' : type === 'internship' ? '💼' : '📄'} size={14} animate={false} />
+              {type === 'demo' ? 'Book Demo' : type === 'internship' ? 'Internship' : 'Enquiry Form'}
             </span>
             <h2 style={{ fontSize: 'clamp(1.6rem, 3.5vw, 2.2rem)', marginBottom: '12px' }}>
               {type === 'demo'
@@ -201,14 +205,17 @@ function ContactPageContent() {
                 <h3 style={{ fontSize: '1.1rem', marginBottom: '16px' }}>Why Students Choose Shree Balaji</h3>
                 <ul className="sidebar-points">
                   {[
-                    '✅ 500+ students trained',
-                    '✅ 90%+ placement rate',
-                    '✅ Live projects — not just theory',
-                    '✅ Industry mentors, not just teachers',
-                    '✅ Free demo — no obligation',
-                    '✅ Flexible batch timings',
+                    '500+ students trained',
+                    '90%+ placement rate',
+                    'Live projects — not just theory',
+                    'Industry mentors, not just teachers',
+                    'Free demo — no obligation',
+                    'Flexible batch timings',
                   ].map(pt => (
-                    <li key={pt} style={{ fontSize: '0.88rem', color: 'var(--text-muted)', padding: '5px 0', borderBottom: '1px solid var(--border)' }}>{pt}</li>
+                    <li key={pt} style={{ fontSize: '0.88rem', color: 'var(--text-muted)', padding: '8px 0', borderBottom: '1px solid var(--border)', display: 'flex', alignItems: 'center', gap: '8px' }}>
+                      <Icon name="✅" color="#10B981" size={14} animate={false} />
+                      <span>{pt}</span>
+                    </li>
                   ))}
                 </ul>
               </div>
@@ -240,7 +247,9 @@ function ContactPageContent() {
 
               {/* Location card */}
               <div className="card contact-sidebar-card">
-                <h3 style={{ fontSize: '1rem', marginBottom: '12px' }}>📍 Find Us</h3>
+                <h3 style={{ fontSize: '1rem', marginBottom: '12px', display: 'flex', alignItems: 'center', gap: '6px' }}>
+                  <Icon name="📍" color="#F59E0B" size={16} animate={false} /> Find Us
+                </h3>
                 <p style={{ fontSize: '0.85rem', color: 'var(--text-muted)', lineHeight: '1.6', marginBottom: '12px' }}>
                   Shree Balaji Coaching Institute<br />
                   Sector 34-A, Chandigarh<br />

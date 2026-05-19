@@ -2,6 +2,8 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { TESTIMONIALS, VIDEO_TESTIMONIALS } from '@/data/trust';
+import Icon from '@/components/ui/Icon';
+import { Play } from 'lucide-react';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
@@ -9,16 +11,16 @@ const fadeUp = {
 };
 
 const FILTER_TABS = [
-  { label: 'All', value: 'all' },
-  { label: '🎓 Students', value: 'student' },
-  { label: '👨‍👩‍👧 Parents', value: 'parent' },
+  { label: 'All', value: 'all', icon: null },
+  { label: 'Students', value: 'student', icon: 'graduation' },
+  { label: 'Parents', value: 'parent', icon: 'users' },
 ];
 
 function Stars({ count }) {
   return (
-    <div style={{ display: 'flex', gap: '2px', marginBottom: '14px' }}>
+    <div style={{ display: 'flex', gap: '4px', marginBottom: '14px' }}>
       {Array.from({ length: count }).map((_, i) => (
-        <span key={i} style={{ color: '#F59E0B', fontSize: '0.9rem' }}>★</span>
+        <Icon key={i} name="star" size={14} color="#F59E0B" animate={false} />
       ))}
     </div>
   );
@@ -26,7 +28,8 @@ function Stars({ count }) {
 
 function TestimonialCard({ t }) {
   const { name, role, batch, type, rating, text, initials, color, course } = t;
-  const typeLabel = type === 'parent' ? '👨‍👩‍👧 Parent' : '🎓 Student';
+  const typeLabel = type === 'parent' ? 'Parent' : 'Student';
+  const typeIcon = type === 'parent' ? 'users' : 'graduation';
 
   return (
     <motion.div
@@ -65,13 +68,17 @@ function TestimonialCard({ t }) {
           <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{role} · Batch {batch}</div>
         </div>
         <span style={{
-          fontSize: '0.68rem', padding: '2px 8px',
+          fontSize: '0.68rem', padding: '4px 10px',
           background: type === 'parent' ? 'rgba(16,185,129,0.12)' : 'var(--primary-dim)',
           color: type === 'parent' ? '#6EE7B7' : '#93C5FD',
           borderRadius: '999px', fontWeight: '600',
           border: `1px solid ${type === 'parent' ? 'rgba(16,185,129,0.25)' : 'rgba(37,99,235,0.3)'}`,
           whiteSpace: 'nowrap',
+          display: 'inline-flex',
+          alignItems: 'center',
+          gap: '4px',
         }}>
+          <Icon name={typeIcon} size={11} animate={false} />
           {typeLabel}
         </span>
       </div>
@@ -113,7 +120,7 @@ function VideoTestimonialSlot({ slot }) {
           onMouseEnter={e => e.currentTarget.style.transform = 'scale(1.1)'}
           onMouseLeave={e => e.currentTarget.style.transform = 'scale(1)'}
         >
-          <span style={{ fontSize: '1.2rem', marginLeft: '4px' }}>▶</span>
+          <Play size={18} fill="#fff" color="#fff" style={{ marginLeft: '2px' }} />
         </div>
         <div style={{
           fontSize: '0.72rem', color: 'var(--text-faint)', fontWeight: '600',
@@ -158,8 +165,8 @@ export default function TestimonialsSection() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span className="badge badge-cyan" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-              💬 Testimonials
+            <span className="badge badge-cyan" style={{ marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name="message" size={14} animate={false} /> Testimonials
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.7rem)', marginBottom: '14px' }}>
               Voices That{' '}
@@ -174,7 +181,7 @@ export default function TestimonialsSection() {
           <motion.div variants={fadeUp} style={{
             display: 'flex', gap: '8px', justifyContent: 'center', marginBottom: '36px',
           }}>
-            {FILTER_TABS.map(({ label, value }) => (
+            {FILTER_TABS.map(({ label, value, icon }) => (
               <button
                 key={value}
                 onClick={() => setActiveTab(value)}
@@ -188,8 +195,12 @@ export default function TestimonialsSection() {
                   fontSize: '0.82rem', fontWeight: '600',
                   cursor: 'pointer',
                   transition: 'all 0.2s ease',
+                  display: 'inline-flex',
+                  alignItems: 'center',
+                  gap: '6px',
                 }}
               >
+                {icon && <Icon name={icon} size={13} animate={false} />}
                 {label}
               </button>
             ))}
@@ -216,8 +227,8 @@ export default function TestimonialsSection() {
           <motion.div variants={fadeUp}>
             <div style={{ display: 'flex', alignItems: 'center', gap: '16px', marginBottom: '24px' }}>
               <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
-              <h3 style={{ fontSize: '1rem', color: '#94A3B8', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap' }}>
-                🎬 Video Testimonials
+              <h3 style={{ fontSize: '1rem', color: '#94A3B8', fontFamily: 'Inter, sans-serif', whiteSpace: 'nowrap', display: 'inline-flex', alignItems: 'center', gap: '8px' }}>
+                <Icon name="video" size={16} color="#94A3B8" animate={false} /> Video Testimonials
               </h3>
               <div style={{ flex: 1, height: '1px', background: 'var(--border)' }} />
             </div>

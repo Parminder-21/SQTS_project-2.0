@@ -1,10 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 const CATEGORIES = [
   {
-    icon: '🏫',
+    icon: 'school',
     title: 'School Coaching',
     desc: 'Computer basics, MS Office, typing, and digital literacy for Class 3–8 students.',
     tags: ['MS Office', 'Typing', 'Internet Basics', 'Digital Safety'],
@@ -12,7 +13,7 @@ const CATEGORIES = [
     href: '/courses?category=School+Coaching',
   },
   {
-    icon: '💻',
+    icon: 'terminal',
     title: 'Programming Courses',
     desc: 'Python, C, C++, Java, and DSA — from beginner to placement-ready.',
     tags: ['Python', 'Java', 'C/C++', 'DSA'],
@@ -20,7 +21,7 @@ const CATEGORIES = [
     href: '/courses?category=Programming',
   },
   {
-    icon: '🌐',
+    icon: 'globe',
     title: 'Web Development',
     desc: 'Full-stack web development with HTML, CSS, JavaScript, React, and Node.js.',
     tags: ['HTML/CSS', 'React', 'Node.js', 'MongoDB'],
@@ -28,7 +29,7 @@ const CATEGORIES = [
     href: '/courses?category=Web+Development',
   },
   {
-    icon: '🤖',
+    icon: 'bot',
     title: 'AI & Future Tech',
     desc: 'Practical AI tools, prompt engineering, machine learning basics, and data science.',
     tags: ['AI Tools', 'Prompt Eng.', 'ML Basics', 'Data Science'],
@@ -36,7 +37,7 @@ const CATEGORIES = [
     href: '/courses?category=Artificial+Intelligence',
   },
   {
-    icon: '📋',
+    icon: 'briefcase',
     title: 'Internship Programs',
     desc: '50+ domains — get real work experience with a certificate and mentor guidance.',
     tags: ['Web Dev', 'Graphic Design', 'Digital Marketing', 'AI'],
@@ -44,7 +45,7 @@ const CATEGORIES = [
     href: '/register?type=internship',
   },
   {
-    icon: '🎨',
+    icon: 'palette',
     title: 'Graphic Design & Digital Skills',
     desc: 'Canva, Photoshop, video editing, social media marketing, and SEO.',
     tags: ['Canva', 'Photoshop', 'Video Editing', 'SEO'],
@@ -100,8 +101,9 @@ export default function TrainingCategories() {
                     width: '44px', height: '44px', flexShrink: 0,
                     background: `${color}18`, borderRadius: '10px',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '1.3rem',
-                  }}>{icon}</div>
+                  }}>
+                    <Icon name={icon} color={color} size={22} />
+                  </div>
                   <h3 style={{ fontSize: '1.05rem', fontFamily: 'Inter, sans-serif', fontWeight: '700', color: '#F1F5F9' }}>
                     {title}
                   </h3>

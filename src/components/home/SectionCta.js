@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 /**
  * SectionCta — a compact conversion nudge placed after major sections.
@@ -10,7 +11,7 @@ import Link from 'next/link';
 
 const VARIANTS = {
   placement: {
-    icon: '🎯',
+    icon: 'target',
     headline: 'Want a placement like these?',
     sub: 'Start with a free demo class — no commitment required.',
     primary:   { label: 'Book Free Demo',     href: '/contact?type=demo' },
@@ -18,7 +19,7 @@ const VARIANTS = {
     accent: '#2563EB',
   },
   internship: {
-    icon: '💼',
+    icon: 'briefcase',
     headline: 'Ready to start your internship?',
     sub: 'Apply today — 50+ domains, live project experience, verified certificate.',
     primary:   { label: 'Apply for Internship', href: '/contact?type=internship' },
@@ -26,7 +27,7 @@ const VARIANTS = {
     accent: '#7C3AED',
   },
   demo: {
-    icon: '🎓',
+    icon: 'graduation',
     headline: 'Not sure which course is right?',
     sub: 'Book a free 45-min demo class and find out — on us.',
     primary:   { label: 'Book My Free Demo', href: '/contact?type=demo' },
@@ -34,7 +35,7 @@ const VARIANTS = {
     accent: '#06B6D4',
   },
   enroll: {
-    icon: '🚀',
+    icon: 'rocket',
     headline: 'Ready to get started?',
     sub: 'Join the next batch and start building real skills today.',
     primary:   { label: 'Enroll Now',       href: '/register' },
@@ -65,7 +66,15 @@ export default function SectionCta({ variant = 'demo' }) {
     >
       {/* Left: copy */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '14px', flex: '1 1 260px' }}>
-        <span style={{ fontSize: '2rem', flexShrink: 0 }} aria-hidden="true">{cfg.icon}</span>
+        <div style={{
+          width: '52px', height: '52px',
+          background: `${cfg.accent}14`,
+          borderRadius: '12px',
+          display: 'flex', alignItems: 'center', justifyContent: 'center',
+          flexShrink: 0,
+        }}>
+          <Icon name={cfg.icon} color={cfg.accent} size={28} />
+        </div>
         <div>
           <p style={{ fontWeight: '700', color: '#F1F5F9', fontSize: '0.95rem', marginBottom: '4px' }}>
             {cfg.headline}

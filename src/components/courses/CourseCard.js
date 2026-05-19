@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 /**
  * Reusable course card — used on the courses listing page and category sections.
@@ -41,10 +42,9 @@ export default function CourseCard({ course, size = 'default' }) {
             background: `${color || 'var(--primary)'}18`,
             borderRadius: '10px',
             display: 'flex', alignItems: 'center', justifyContent: 'center',
-            fontSize: isCompact ? '1.1rem' : '1.4rem',
             flexShrink: 0,
           }}>
-            {icon || '📚'}
+            <Icon name={icon || 'school'} color={color || 'var(--primary)'} size={isCompact ? 18 : 22} />
           </div>
           <span style={{
             fontSize: '0.72rem', fontWeight: '700',
@@ -92,13 +92,13 @@ export default function CourseCard({ course, size = 'default' }) {
           flexWrap: 'wrap',
         }}>
           {duration && (
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              ⏱ {duration}
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <Icon name="clock" size={12} animate={false} color="var(--text-muted)" /> {duration}
             </span>
           )}
           {level && (
-            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'flex', alignItems: 'center', gap: '4px' }}>
-              📶 {level}
+            <span style={{ fontSize: '0.75rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+              <Icon name="chart" size={12} animate={false} color="var(--text-muted)" /> {level}
             </span>
           )}
         </div>

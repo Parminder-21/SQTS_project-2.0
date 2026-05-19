@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { INTERNSHIP_DOMAINS, INTERNSHIP_FEATURES } from '@/data/trust';
+import Icon from '@/components/ui/Icon';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
@@ -26,8 +27,8 @@ export default function InternshipSection() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '56px' }}>
-            <span className="badge badge-cyan" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-              🚀 Internship Program
+            <span className="badge badge-cyan" style={{ marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name="rocket" size={14} animate={false} /> Internship Program
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.7rem)', marginBottom: '14px' }}>
               Learn. Build.{' '}
@@ -56,9 +57,8 @@ export default function InternshipSection() {
                   background: 'var(--accent-dim)',
                   borderRadius: '10px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1.15rem',
                 }}>
-                  {icon}
+                  <Icon name={icon} color="#22D3EE" size={20} />
                 </div>
                 <div>
                   <h4 style={{ fontSize: '0.92rem', color: '#F1F5F9', marginBottom: '4px' }}>{title}</h4>
@@ -121,7 +121,15 @@ export default function InternshipSection() {
                     }}
                     whileHover={{ borderColor: `${color}50` }}
                   >
-                    <span style={{ fontSize: '1.4rem', flexShrink: 0 }}>{icon}</span>
+                    <div style={{
+                      width: '32px', height: '32px',
+                      background: `${color}14`,
+                      borderRadius: '8px',
+                      display: 'flex', alignItems: 'center', justifyContent: 'center',
+                      flexShrink: 0,
+                    }}>
+                      <Icon name={icon} color={color} size={16} />
+                    </div>
                     <div style={{ minWidth: 0 }}>
                       <div style={{ fontSize: '0.85rem', fontWeight: '600', color: '#E2E8F0', lineHeight: '1.3' }}>{domain}</div>
                       <div style={{ fontSize: '0.72rem', color, marginTop: '2px', fontWeight: '600' }}>

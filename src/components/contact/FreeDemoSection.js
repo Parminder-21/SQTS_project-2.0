@@ -1,12 +1,13 @@
 'use client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 const PERKS = [
-  { icon: '🎯', text: 'See our real teaching style — no marketing fluff' },
-  { icon: '🆓', text: '100% free — no credit card or commitment' },
-  { icon: '⏱', text: '45-minute live session, interactive Q&A included' },
-  { icon: '📱', text: 'Online or in-person at Chandigarh campus' },
+  { icon: 'target', text: 'See our real teaching style — no marketing fluff' },
+  { icon: 'gift', text: '100% free — no credit card or commitment' },
+  { icon: 'clock', text: '45-minute live session, interactive Q&A included' },
+  { icon: 'smartphone', text: 'Online or in-person at Chandigarh campus' },
 ];
 
 export default function FreeDemoSection() {
@@ -24,8 +25,8 @@ export default function FreeDemoSection() {
           transition={{ duration: 0.6 }}
           className="demo-copy"
         >
-          <span className="badge badge-cyan" style={{ marginBottom: '18px' }}>
-            🎓 Zero-risk offer
+          <span className="badge badge-cyan" style={{ marginBottom: '18px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+            <Icon name="graduation" size={14} animate={false} /> Zero-risk offer
           </span>
           <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', marginBottom: '16px' }}>
             Attend a Free Demo Class<br />
@@ -39,7 +40,9 @@ export default function FreeDemoSection() {
           <ul className="demo-perks" role="list">
             {PERKS.map(({ icon, text }) => (
               <li key={text} className="demo-perk-item">
-                <span className="demo-perk-icon" aria-hidden="true">{icon}</span>
+                <span className="demo-perk-icon" aria-hidden="true">
+                  <Icon name={icon} size={16} animate={false} color="#06B6D4" />
+                </span>
                 <span>{text}</span>
               </li>
             ))}
@@ -71,8 +74,19 @@ export default function FreeDemoSection() {
           transition={{ duration: 0.6, delay: 0.1 }}
           className="demo-card card"
         >
-          <div className="demo-card-header">
-            <span style={{ fontSize: '2.2rem' }}>🖥️</span>
+          <div className="demo-card-header" style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
+            <div style={{
+              width: '46px',
+              height: '46px',
+              background: 'rgba(6,182,212,0.12)',
+              borderRadius: '10px',
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',
+              flexShrink: 0,
+            }}>
+              <Icon name="monitor" color="#06B6D4" size={24} />
+            </div>
             <div>
               <h3 style={{ fontSize: '1.25rem', marginBottom: '4px' }}>Live Demo Session</h3>
               <p style={{ fontSize: '0.85rem', margin: 0 }}>Next available: <strong style={{ color: '#F1F5F9' }}>This Week</strong></p>
@@ -94,18 +108,18 @@ export default function FreeDemoSection() {
 
           <div className="demo-card-footer">
             <div className="demo-meta-item">
-              <span style={{ fontSize: '1.1rem' }}>📍</span>
+              <Icon name="map_pin" size={16} color="var(--text-muted)" style={{ flexShrink: 0 }} animate={false} />
               <span>Online + Chandigarh Campus</span>
             </div>
             <div className="demo-meta-item">
-              <span style={{ fontSize: '1.1rem' }}>👥</span>
+              <Icon name="users" size={16} color="var(--text-muted)" style={{ flexShrink: 0 }} animate={false} />
               <span>Small batch — max 8 students</span>
             </div>
           </div>
 
           {/* Urgency nudge */}
-          <div className="demo-urgency">
-            🔥 3 seats left this week — book before they fill up
+          <div className="demo-urgency" style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '6px' }}>
+            <Icon name="flame" size={15} color="#FBBF24" /> 3 seats left this week — book before they fill up
           </div>
         </motion.div>
       </div>

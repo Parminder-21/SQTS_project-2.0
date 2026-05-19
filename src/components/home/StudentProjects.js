@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { STUDENT_PROJECTS } from '@/data/trust';
+import Icon from '@/components/ui/Icon';
 
 const fadeUp = {
   hidden:  { opacity: 0, y: 24 },
@@ -30,9 +31,9 @@ function ProjectCard({ project }) {
           background: `${color}15`,
           borderRadius: '12px',
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          fontSize: '1.5rem', flexShrink: 0,
+          flexShrink: 0,
         }}>
-          {icon}
+          <Icon name={icon} color={color} size={24} />
         </div>
         <span style={{
           fontSize: '0.7rem', fontWeight: '700',
@@ -109,8 +110,8 @@ export default function StudentProjects() {
         >
           {/* Header */}
           <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '48px' }}>
-            <span className="badge badge-blue" style={{ marginBottom: '16px', display: 'inline-flex' }}>
-              💼 Student Projects
+            <span className="badge badge-blue" style={{ marginBottom: '16px', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+              <Icon name="briefcase" size={14} animate={false} /> Student Projects
             </span>
             <h2 style={{ fontSize: 'clamp(1.9rem, 4vw, 2.7rem)', marginBottom: '14px' }}>
               What Our Students{' '}

@@ -3,6 +3,26 @@ import { getCourseById, getRelatedCourses } from '@/data/courses';
 import SyllabusAccordion from '@/components/courses/SyllabusAccordion';
 import CourseCard from '@/components/courses/CourseCard';
 import CourseViewTracker from '@/components/CourseViewTracker';
+import {
+  Terminal, Globe, Bot, Palette, School,
+  Lock, BarChart3, Clock, Briefcase, FileText,
+  Laptop, BookOpen, GraduationCap
+} from 'lucide-react';
+
+const SERVER_ICONS = {
+  terminal: Terminal,
+  python: Terminal,
+  globe: Globe,
+  monitor: Laptop,
+  cart: Globe,
+  bot: Bot,
+  chart: BarChart3,
+  lock: Lock,
+  palette: Palette,
+  school: School,
+  briefcase: Briefcase,
+  file: FileText,
+};
 
 export const dynamic = 'force-static';
 
@@ -29,7 +49,9 @@ export default async function CourseDetailPage({ params }) {
     return (
       <div style={{ paddingTop: '70px', minHeight: '80vh', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
         <div className="container" style={{ textAlign: 'center', padding: '80px 24px' }}>
-          <div style={{ fontSize: '4rem', marginBottom: '20px' }}>📚</div>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '20px' }}>
+            <BookOpen size={64} color="var(--primary)" />
+          </div>
           <h1 style={{ marginBottom: '12px' }}>Course Not Found</h1>
           <p style={{ marginBottom: '32px' }}>This course may have been removed or the link is incorrect.</p>
           <Link href="/courses" className="btn-primary">← Back to Courses</Link>
@@ -59,23 +81,23 @@ export default async function CourseDetailPage({ params }) {
           <div style={{ display: 'flex', gap: '10px', alignItems: 'center', marginBottom: '16px', flexWrap: 'wrap' }}>
             <span className="badge" style={{ background: `${color}20`, color }}>{course.category}</span>
             {course.level && (
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '3px 12px', borderRadius: '999px' }}>
-                📶 {course.level}
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '3px 12px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <BarChart3 size={12} /> {course.level}
               </span>
             )}
             {course.duration && (
-              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '3px 12px', borderRadius: '999px' }}>
-                ⏱ {course.duration}
+              <span style={{ fontSize: '0.8rem', color: 'var(--text-muted)', background: 'var(--bg-card)', border: '1px solid var(--border)', padding: '3px 12px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <Clock size={12} /> {course.duration}
               </span>
             )}
             {course.certification && (
-              <span style={{ fontSize: '0.8rem', color: '#6EE7B7', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', padding: '3px 12px', borderRadius: '999px' }}>
-                🏆 Certificate
+              <span style={{ fontSize: '0.8rem', color: '#6EE7B7', background: 'rgba(16,185,129,0.1)', border: '1px solid rgba(16,185,129,0.25)', padding: '3px 12px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <GraduationCap size={12} /> Certificate
               </span>
             )}
             {course.internship && (
-              <span style={{ fontSize: '0.8rem', color: '#93C5FD', background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.25)', padding: '3px 12px', borderRadius: '999px' }}>
-                🚀 Internship Available
+              <span style={{ fontSize: '0.8rem', color: '#93C5FD', background: 'rgba(37,99,235,0.1)', border: '1px solid rgba(37,99,235,0.25)', padding: '3px 12px', borderRadius: '999px', display: 'inline-flex', alignItems: 'center', gap: '4px' }}>
+                <Briefcase size={12} /> Internship Available
               </span>
             )}
           </div>
@@ -85,9 +107,11 @@ export default async function CourseDetailPage({ params }) {
               width: '56px', height: '56px', flexShrink: 0,
               background: `${color}18`, borderRadius: '14px',
               display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontSize: '1.8rem',
             }}>
-              {course.icon}
+              {(() => {
+                const IconComponent = SERVER_ICONS[course.icon] || School;
+                return <IconComponent size={28} color={color} />;
+              })()}
             </div>
             <div style={{ flex: 1 }}>
               <h1 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.8rem)', marginBottom: '10px' }}>
@@ -210,15 +234,17 @@ export default async function CourseDetailPage({ params }) {
               <h4 style={{ fontSize: '0.9rem', marginBottom: '16px', color: '#F1F5F9' }}>Course Details</h4>
               <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                 {[
-                  { label: 'Duration',      value: course.duration,                    icon: '⏱' },
-                  { label: 'Level',         value: course.level,                       icon: '📶' },
-                  { label: 'Certificate',   value: course.certification ? 'Yes' : 'No', icon: '🏆' },
-                  { label: 'Internship',    value: course.internship ? 'Available' : 'Not included', icon: '🚀' },
-                  { label: 'Modules',       value: `${course.modules?.length || 0} modules`, icon: '📋' },
-                  { label: 'Projects',      value: `${course.projects?.length || 0} projects`, icon: '🗂️' },
-                ].filter(r => r.value).map(({ label, value, icon }) => (
+                  { label: 'Duration',      value: course.duration,                    icon: Clock },
+                  { label: 'Level',         value: course.level,                       icon: BarChart3 },
+                  { label: 'Certificate',   value: course.certification ? 'Yes' : 'No', icon: GraduationCap },
+                  { label: 'Internship',    value: course.internship ? 'Available' : 'Not included', icon: Briefcase },
+                  { label: 'Modules',       value: `${course.modules?.length || 0} modules`, icon: FileText },
+                  { label: 'Projects',      value: `${course.projects?.length || 0} projects`, icon: FileText },
+                ].filter(r => r.value).map(({ label, value, icon: IconComponent }) => (
                   <div key={label} style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', gap: '8px' }}>
-                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)' }}>{icon} {label}</span>
+                    <span style={{ fontSize: '0.82rem', color: 'var(--text-muted)', display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
+                      <IconComponent size={14} color="var(--text-muted)" /> {label}
+                    </span>
                     <span style={{ fontSize: '0.82rem', fontWeight: '600', color: '#F1F5F9' }}>{value}</span>
                   </div>
                 ))}

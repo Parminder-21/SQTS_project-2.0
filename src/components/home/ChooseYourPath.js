@@ -1,10 +1,11 @@
 'use client';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
+import Icon from '@/components/ui/Icon';
 
 const PATHS = [
   {
-    icon: '🏫',
+    icon: 'school',
     title: 'School Students',
     subtitle: 'Class 3rd – 8th',
     desc: 'Foundation-level computer science, typing, MS Office, and digital literacy programs designed for young learners.',
@@ -13,7 +14,7 @@ const PATHS = [
     href: '/courses?category=School+Coaching',
   },
   {
-    icon: '🎓',
+    icon: 'graduation',
     title: 'College Students',
     subtitle: 'BCA / BTech / MCA',
     desc: 'Advanced programming, web development, AI tools, and project-based learning to make you industry-ready.',
@@ -22,7 +23,7 @@ const PATHS = [
     href: '/courses?category=Programming',
   },
   {
-    icon: '💼',
+    icon: 'briefcase',
     title: 'Job Seekers',
     subtitle: 'Placement Focused',
     desc: 'Resume building, mock interviews, aptitude training, and direct placement assistance with 200+ hiring partners.',
@@ -31,7 +32,7 @@ const PATHS = [
     href: '/register?type=placement',
   },
   {
-    icon: '🚀',
+    icon: 'rocket',
     title: 'Internship Learners',
     subtitle: '50+ Domains Available',
     desc: 'Real-world internship programs across web dev, graphic design, digital marketing, AI, and more.',
@@ -85,10 +86,9 @@ export default function ChooseYourPath() {
                   background: `${color}18`,
                   borderRadius: '12px',
                   display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  fontSize: '1.5rem',
                   marginBottom: '16px',
                 }}>
-                  {icon}
+                  <Icon name={icon} color={color} size={24} />
                 </div>
                 <div style={{ marginBottom: '4px' }}>
                   <h3 style={{ fontSize: '1.1rem', fontFamily: 'Inter, sans-serif', fontWeight: '700', color: '#F1F5F9' }}>

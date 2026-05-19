@@ -97,27 +97,27 @@ export const HIRING_PARTNERS = [
 
 // ─── INTERNSHIP DOMAINS ───────────────────────────────────────────────────────
 export const INTERNSHIP_DOMAINS = [
-  { domain: 'Web Development',       icon: '🌐', color: '#06B6D4', openings: 12 },
-  { domain: 'Python Development',    icon: '🐍', color: '#10B981', openings: 8  },
-  { domain: 'Data Analysis',         icon: '📊', color: '#8B5CF6', openings: 6  },
-  { domain: 'Graphic Design',        icon: '🎨', color: '#EC4899', openings: 10 },
-  { domain: 'Digital Marketing',     icon: '📣', color: '#F59E0B', openings: 7  },
-  { domain: 'React Development',     icon: '⚛️', color: '#3B82F6', openings: 5  },
-  { domain: 'UI/UX Design',          icon: '✏️', color: '#06B6D4', openings: 4  },
-  { domain: 'Content Writing',       icon: '✍️', color: '#10B981', openings: 9  },
-  { domain: 'Video Editing',         icon: '🎬', color: '#EF4444', openings: 6  },
-  { domain: 'SEO & SEM',             icon: '🔍', color: '#F59E0B', openings: 5  },
-  { domain: 'Android Development',   icon: '📱', color: '#3B82F6', openings: 3  },
-  { domain: 'Cyber Security',        icon: '🔐', color: '#EF4444', openings: 4  },
+  { domain: 'Web Development',       icon: 'globe', color: '#06B6D4', openings: 12 },
+  { domain: 'Python Development',    icon: 'python', color: '#10B981', openings: 8  },
+  { domain: 'Data Analysis',         icon: 'chart', color: '#8B5CF6', openings: 6  },
+  { domain: 'Graphic Design',        icon: 'palette', color: '#EC4899', openings: 10 },
+  { domain: 'Digital Marketing',     icon: 'megaphone', color: '#F59E0B', openings: 7  },
+  { domain: 'React Development',     icon: 'react', color: '#3B82F6', openings: 5  },
+  { domain: 'UI/UX Design',          icon: 'pen', color: '#06B6D4', openings: 4  },
+  { domain: 'Content Writing',       icon: 'pen', color: '#10B981', openings: 9  },
+  { domain: 'Video Editing',         icon: 'video', color: '#EF4444', openings: 6  },
+  { domain: 'SEO & SEM',             icon: 'search', color: '#F59E0B', openings: 5  },
+  { domain: 'Android Development',   icon: 'smartphone', color: '#3B82F6', openings: 3  },
+  { domain: 'Cyber Security',        icon: 'lock', color: '#EF4444', openings: 4  },
 ];
 
 export const INTERNSHIP_FEATURES = [
-  { icon: '🗂️', title: 'Live Projects',       desc: 'Work on real client projects, not dummy assignments.' },
-  { icon: '👨‍🏫', title: 'Mentor Support',      desc: 'Dedicated mentor for weekly 1-on-1 guidance sessions.' },
-  { icon: '🏆', title: 'Certificate',          desc: 'Industry-recognised internship completion certificate.' },
-  { icon: '📄', title: 'Resume Building',      desc: 'Professional resume crafted with your internship work.' },
-  { icon: '📅', title: 'Weekly Reviews',       desc: 'Structured weekly check-ins to track your progress.' },
-  { icon: '🤝', title: 'Placement Assistance', desc: 'Direct referrals to our 200+ hiring partner network.' },
+  { icon: 'folder', title: 'Live Projects',       desc: 'Work on real client projects, not dummy assignments.' },
+  { icon: 'mentor', title: 'Mentor Support',      desc: 'Dedicated mentor for weekly 1-on-1 guidance sessions.' },
+  { icon: 'trophy', title: 'Certificate',          desc: 'Industry-recognised internship completion certificate.' },
+  { icon: 'file', title: 'Resume Building',      desc: 'Professional resume crafted with your internship work.' },
+  { icon: 'calendar', title: 'Weekly Reviews',       desc: 'Structured weekly check-ins to track your progress.' },
+  { icon: 'handshake', title: 'Placement Assistance', desc: 'Direct referrals to our 200+ hiring partner network.' },
 ];
 
 // ─── STUDENT PROJECTS ─────────────────────────────────────────────────────────
@@ -131,7 +131,7 @@ export const STUDENT_PROJECTS = [
     desc: 'A complete online store with product listings, cart, user auth, and Razorpay payment integration.',
     tags: ['React', 'Node.js', 'MongoDB', 'Razorpay'],
     color: '#06B6D4',
-    icon: '🛒',
+    icon: 'cart',
   },
   {
     id: 2,
@@ -142,7 +142,7 @@ export const STUDENT_PROJECTS = [
     desc: 'Interactive Power BI dashboard analysing 2 years of sales data with trend forecasting.',
     tags: ['Power BI', 'Excel', 'SQL', 'Python'],
     color: '#8B5CF6',
-    icon: '📊',
+    icon: 'chart',
   },
   {
     id: 3,
@@ -153,7 +153,7 @@ export const STUDENT_PROJECTS = [
     desc: 'A tool that generates blog posts, social captions, and email drafts using GPT API.',
     tags: ['Python', 'OpenAI API', 'Streamlit'],
     color: '#10B981',
-    icon: '🤖',
+    icon: 'bot',
   },
   {
     id: 4,
@@ -164,7 +164,7 @@ export const STUDENT_PROJECTS = [
     desc: 'Fully responsive portfolio with animations, project showcase, and contact form.',
     tags: ['HTML', 'CSS', 'JavaScript', 'Netlify'],
     color: '#3B82F6',
-    icon: '💼',
+    icon: 'briefcase',
   },
   {
     id: 5,
@@ -175,7 +175,7 @@ export const STUDENT_PROJECTS = [
     desc: 'Console-based grade management system with file persistence and report generation.',
     tags: ['Python', 'File I/O', 'OOP'],
     color: '#F59E0B',
-    icon: '🐍',
+    icon: 'python',
   },
   {
     id: 6,
@@ -186,7 +186,7 @@ export const STUDENT_PROJECTS = [
     desc: 'Complete brand kit — logo, business card, social media templates, and brand guidelines.',
     tags: ['Canva', 'Illustrator', 'Photoshop'],
     color: '#EC4899',
-    icon: '🎨',
+    icon: 'palette',
   },
 ];
 

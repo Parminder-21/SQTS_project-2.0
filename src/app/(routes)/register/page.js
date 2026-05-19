@@ -3,6 +3,7 @@ import { useState, useEffect, Suspense } from 'react';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
+import { CheckCircle2 } from 'lucide-react';
 
 /* ── Type config — maps ?type= param to UI copy ── */
 const TYPE_CONFIG = {
@@ -158,7 +159,9 @@ function RegisterContent() {
     return (
       <AuthLayout badge={badge} title={title} subtitle="You are already logged in!">
         <div style={{ textAlign: 'center' }}>
-           <div style={{ fontSize: '3rem', marginBottom: '16px' }}>✅</div>
+           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '16px' }}>
+             <CheckCircle2 size={48} color="#10B981" />
+           </div>
            <h3 style={{ marginBottom: '16px' }}>Ready to proceed?</h3>
            {success && <div className="alert-success" style={{ marginBottom: '20px' }}>{success}</div>}
            <button onClick={() => {
