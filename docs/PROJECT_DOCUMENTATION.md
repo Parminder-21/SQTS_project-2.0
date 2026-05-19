@@ -1,38 +1,43 @@
-# SQTS Project 2.0 Project Document
+# Shree Balaji Coaching Institute (previously SQTS) Project Document
+
+**🚀 Live Demo Link:** [https://sqts-2.vercel.app](https://sqts-2.vercel.app)
 
 ## Overview
-SQTS Training Institute is a Next.js 16 application for showcasing training programs, handling admin operations, and serving database-backed course content.
+Shree Balaji Coaching Institute is a premium tech training, school coaching, and career placement platform built as a high-performance Next.js 16 web application. It handles student registrations, detailed dynamic course catalog pre-rendering, multi-fallback lead storage, and admin dashboards.
 
 ## Current Capabilities
-- Public course catalog with server-side filtering and pagination
-- Course detail pages with view tracking
-- Admin dashboard with authenticated login, logout, and CRUD actions
-- JWT auth with refresh tokens and route protection
-- Two-factor authentication setup, verification, and disable flow
-- Email sending support for admin-driven notifications
-- Analytics hooks for page views, course views, and admin logins
-- Global and route-specific error boundaries
-- Structured logging, validation, and rate limiting helpers
+- **Dynamic Course Catalog:** Catalog with detailed roadmaps, search, category filtering, and pre-rendering support for 13 custom courses.
+- **Syllabus Accordions:** Dynamic course syllabus modules and pricing plan custom cards.
+- **Audience Funneling:** Targeted paths for School Coaching, College Programs, Job Seekers, and Internship Aspirants.
+- **Placement & Partners Showcase:** Verified placement stories with verified badges and recruiter monograms.
+- **Corporate Internship Grid:** Displays active domains, openings, mentor support, and certification info.
+- **Multi-fallback Lead Capture:** intake endpoint `/api/enquiry` storing registrations across Formspree, Google Sheets webhooks, and SQLite backups.
+- **WhatsApp Counsellor float:** Delay-timed, pulse-animated WhatsApp counselor button.
+- **Admin Dashboard:** authenticated login, refresh tokens, and 2FA authentication management.
+- **Analytics Provider:** Analytics hooks tracking pages, course views, and admin logins.
+- **Robust System Utilities:** Global and route-specific error boundaries, rate limiters, input validation, and structured loggers.
 
 ## Main Routes
-- `/` Home page
-- `/courses` Course catalog
-- `/courses/[id]` Course detail page
-- `/register` Registration page
-- `/alumni` Alumni showcase
-- `/admin` Admin dashboard
+- `/` Home page (Hero, Stats, Paths, Placement, Internships, Testimonials, FAQ)
+- `/courses` Course catalog with search & filters
+- `/courses/[id]` Course detail dynamic roadmaps
+- `/register` Multi-purpose lead intake form (Demo, Course, Internship, Placement)
+- `/contact` Map, address, and interactive enquiry submission form
+- `/alumni` Verified placement showcase
+- `/admin` Admin dashboard with credentials audit
 - `/api/auth/*` Authentication endpoints
 - `/api/courses/*` Course APIs
-- `/api/emails/send` Admin email endpoint
+- `/api/enquiry` Lead capture endpoints
+- `/api/emails/send` Notification triggers
 
 ## Stack
-- Next.js 16.2.3
+- Next.js 16.2.3 (Turbopack)
 - React 19.2.4
-- Turso / libSQL
+- Turso / libSQL (SQLite compatible)
 - JWT, bcryptjs, otplib, qrcode
 - Nodemailer
 - Framer Motion
-- Three.js / React Three Fiber
+- Custom CSS design tokens (globals.css)
 
 ## Key Files
 - [src/app/layout.js](../src/app/layout.js)

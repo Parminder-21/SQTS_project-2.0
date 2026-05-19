@@ -1,26 +1,30 @@
-# SQTS Training Institute
+# Shree Balaji Coaching Institute (previously SQTS)
 
-SQTS Training Institute is a Next.js 16 app for showcasing training programs, managing admin workflows, and serving Turso-backed course data.
+Shree Balaji Coaching Institute is a premium tech training, school coaching, and career placement platform built as a high-performance Next.js 16 web application. It showcases course syllabi, handles dynamic student registrations, supports multi-fallback lead capture, and hosts admin tools.
+
+**🚀 Live Demo:** [https://sqts-2.vercel.app](https://sqts-2.vercel.app)
 
 ## What It Includes
 
-- Public course catalog with search, category filtering, and pagination
-- Course detail pages with view tracking
-- Admin dashboard with JWT login, logout, and CRUD actions
-- Refresh-token auth flow and middleware protection
-- Two-factor authentication setup and verification
-- Email send endpoint for admin-driven notifications
-- Analytics hooks for page, course, and admin events
-- Validation, logging, and rate-limiting utilities
+- **Premium UI/UX:** Sleek Dark Slate (`#090E17`) & Indigo-Sky gradient theme with responsive layouts and full glassmorphic styling cards.
+- **Hero & Interactive Stats:** Custom countdown timer to next batch launch with Framer Motion entry animations and animated counter statistics.
+- **Dynamic Audience Paths:** Targeted visitor funnels for School Students (Class 3–8), College Students (BCA/BTech/MCA), Job Seekers, and Internship Aspirants.
+- **Placement & Success Stories:** Verified alumni career outcome cards (TCS, Infosys, Wipro, etc.) with package LPA labels and verified badges.
+- **Corporate Internship Portal:** Interactive grid displaying open positions, domains (MERN, Python, Cyber Security, etc.), live project guidelines, and mentorship details.
+- **Student Projects Showcase:** Tag-filterable showcase of actual student-built full stack applications.
+- **Accordion FAQ Grouping:** Interactive animated accordion answers covering fees, demo classes, certifications, and support.
+- **Multi-fallback Lead Capture:** Robust intake endpoint `/api/enquiry` checking inputs and storing leads across Formspree, Google Sheets webhooks, and SQLite database fallback.
+- **WhatsApp Counsellor Float:** Timing-delayed, pulse-animated WhatsApp integration with responsive mobile styles.
+- **Dynamic Syllabus Detail Pages:** Detailed roadmap views for all 13 courses, mapping modules, tools, prices, and career options from a single source of truth.
+- **Admin Dashboard:** Secure dashboard with JWT login, refresh token flows, and 2FA authentication management.
 
 ## Tech Stack
 
 | Layer | Technology |
 | --- | --- |
-| Framework | Next.js 16.2.3 |
-| UI | React 19.2.4, Framer Motion |
-| 3D | Three.js, @react-three/fiber, @react-three/drei |
-| Database | Turso / libSQL |
+| Framework | Next.js 16.2.3 (Turbopack) |
+| UI | React 19.2.4, Framer Motion, Tailwind-like custom HSL variables |
+| Database | Turso / libSQL (SQLite compatible) |
 | Auth | JWT, bcryptjs, otplib, qrcode |
 | Email | Nodemailer |
 
