@@ -24,6 +24,7 @@ export default function AdminDashboard() {
   useEffect(() => {
     const t = localStorage.getItem('adminToken');
     if (t) { setToken(t); fetchCourses(t); }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const fetchCourses = async (t) => {

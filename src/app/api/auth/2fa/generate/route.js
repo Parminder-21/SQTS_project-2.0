@@ -30,7 +30,7 @@ export async function POST(request) {
     // Generate a cryptographically secure TOTP secret
     const secret = generateSecret(20);
 
-    const otpauthUrl = totp.keyuri(username, 'SQTS', secret);
+    const otpauthUrl = totp.keyuri(username, 'Shree Balaji', secret);
 
     // Generate QR code as a data URL
     const qrCodeUrl = await QRCode.toDataURL(otpauthUrl);

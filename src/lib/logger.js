@@ -26,7 +26,7 @@ const colors = {
 };
 
 class Logger {
-  constructor(label = 'SQTS') {
+  constructor(label = 'SBCI') {
     this.label = label;
     this.minLevel = process.env.LOG_LEVEL 
       ? LogLevel[process.env.LOG_LEVEL] || LogLevel.INFO

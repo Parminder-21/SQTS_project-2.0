@@ -7,9 +7,13 @@ import ChooseYourPath      from '@/components/home/ChooseYourPath';
 import TrainingCategories  from '@/components/home/TrainingCategories';
 import WhyChooseUs         from '@/components/home/WhyChooseUs';
 import PlacementSection    from '@/components/home/PlacementSection';
-import TestimonialsSection from '@/components/home/TestimonialsSection';
 import HiringPartners      from '@/components/home/HiringPartners';
+import InternshipSection   from '@/components/home/InternshipSection';
+import StudentProjects     from '@/components/home/StudentProjects';
+import TestimonialsSection from '@/components/home/TestimonialsSection';
+import FAQSection          from '@/components/home/FAQSection';
 import CtaBanner           from '@/components/home/CtaBanner';
+import SectionCta          from '@/components/home/SectionCta';
 
 /* ── Auth hook ── */
 function useAuth() {
@@ -41,14 +45,28 @@ export default function Home() {
 
   return (
     <div style={{ paddingTop: '70px' }}>
+      {/* ── Phase 1: Discovery ──────────────────────────────────── */}
       <HeroSection         loggedIn={loggedIn} />
       <StatsBar            />
       <ChooseYourPath      />
       <TrainingCategories  />
       <WhyChooseUs         />
+
+      {/* ── Phase 3: Trust & Proof ──────────────────────────────── */}
       <PlacementSection    />
-      <TestimonialsSection />
+      <div style={{ padding: '0 0 48px' }}><SectionCta variant="placement" /></div>
+
       <HiringPartners      />
+      <InternshipSection   />
+      <div style={{ padding: '0 0 48px' }}><SectionCta variant="internship" /></div>
+
+      <StudentProjects     />
+      <TestimonialsSection />
+      <div style={{ padding: '0 0 48px' }}><SectionCta variant="demo" /></div>
+
+      <FAQSection          />
+
+      {/* ── CTA ─────────────────────────────────────────────────── */}
       <CtaBanner           loggedIn={loggedIn} />
     </div>
   );

@@ -41,7 +41,7 @@ export default async function AlumniPage() {
               Alumni stories coming soon
             </h3>
             <p style={{ marginBottom: '28px' }}>
-              We're collecting placement stories from our graduates. Check back soon.
+              We&apos;re collecting placement stories from our graduates. Check back soon.
             </p>
             <Link href="/courses" className="btn-primary" style={{ display: 'inline-flex' }}>
               Explore Courses
@@ -138,7 +138,7 @@ export default async function AlumniPage() {
             Your Name Could Be <span className="text-gradient">Next</span>
           </h2>
           <p style={{ maxWidth: '440px', margin: '0 auto 28px', fontSize: '0.95rem' }}>
-            Join SQTS Training Institute and get the skills, projects, and placement support to land your dream role.
+            Join Shree Balaji Coaching Institute and get the skills, projects, and placement support to land your dream role.
           </p>
           <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
             <Link href="/courses" className="btn-primary">Explore Programs</Link>

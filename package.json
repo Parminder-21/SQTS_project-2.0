@@ -1,7 +1,7 @@
 {
-  "name": "sqts-website",
+  "name": "shree-balaji-website",
   "version": "2.0.0",
-  "description": "SQTS Training Institute — Premium Next.js web app with Turso database and Vercel deployment",
+  "description": "Shree Balaji Coaching Institute — Premium Next.js web app with Turso database and Vercel deployment",
   "author": "Parminder-21",
   "private": true,
   "scripts": {

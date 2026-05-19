@@ -69,14 +69,14 @@ export default function WhyChooseUs() {
         >
           <motion.div variants={fadeUp} style={{ textAlign: 'center', marginBottom: '48px' }}>
             <span className="badge badge-green" style={{ marginBottom: '14px', display: 'inline-flex' }}>
-              Why SQTS
+              Why Shree Balaji
             </span>
             <h2 style={{ fontSize: 'clamp(1.8rem, 4vw, 2.6rem)', marginBottom: '12px' }}>
-              We Don't Just Teach —{' '}
+              We Don&apos;t Just Teach —{' '}
               <span className="text-gradient">We Transform Careers</span>
             </h2>
             <p style={{ maxWidth: '520px', margin: '0 auto', fontSize: '1rem' }}>
-              8 reasons why 500+ students chose SQTS for their career journey.
+              8 reasons why 500+ students chose Shree Balaji for their career journey.
             </p>
           </motion.div>
 

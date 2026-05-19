@@ -90,6 +90,30 @@ export async function verifyAdminCredentials(username, password) {
 }
 
 /**
+ * Verify any user credentials against the database (returns user object if valid, else null)
+ */
+export async function verifyCredentials(username, password) {
+  const { dbGet } = await import('./db.js');
+
+  const user = await dbGet(
+    'SELECT id, username, password, role FROM users WHERE username = ?',
+    [username]
+  );
+
+  if (!user) return null;
+
+  try {
+    const isValid = await comparePassword(password, user.password);
+    if (isValid) {
+      return { id: user.id, username: user.username, role: user.role };
+    }
+  } catch (error) {
+    console.error('Password comparison failed:', error);
+  }
+  return null;
+}
+
+/**
  * Extract token from request Authorization header
  */
 export function getTokenFromRequest(request) {

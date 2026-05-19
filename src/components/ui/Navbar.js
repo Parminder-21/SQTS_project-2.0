@@ -7,13 +7,56 @@ const NAV_LINKS = [
   { href: '/',        label: 'Home'    },
   { href: '/courses', label: 'Courses' },
   { href: '/alumni',  label: 'Alumni'  },
+  { href: '/contact', label: 'Contact' },
 ];
+
+// ── Auth button — shown in both desktop and mobile ──────────────────────
+const AuthButton = ({ mobile = false, loggedIn, username, role, handleLogout }) => {
+  if (loggedIn) {
+    const dashboardLink = role === 'admin' ? '/admin' : '/dashboard';
+    return (
+      <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexDirection: mobile ? 'column' : 'row', width: mobile ? '100%' : 'auto' }}>
+        <Link href={dashboardLink} style={{ textDecoration: 'none' }}>
+          <span style={{
+            fontSize: '0.82rem', color: 'var(--text-muted)',
+            background: 'var(--bg-surface)',
+            border: '1px solid var(--border)',
+            borderRadius: '999px',
+            padding: '5px 14px',
+            whiteSpace: 'nowrap',
+            cursor: 'pointer',
+          }}>
+            👤 {username} (Dashboard)
+          </span>
+        </Link>
+        <button
+          onClick={handleLogout}
+          className="btn-outline"
+          style={{ padding: '7px 18px', fontSize: '0.85rem', width: mobile ? '100%' : 'auto' }}
+        >
+          Sign Out
+        </button>
+      </div>
+    );
+  }
+
+  return (
+    <Link
+      href="/register"
+      className="btn-primary"
+      style={{ padding: '9px 22px', fontSize: '0.88rem', width: mobile ? '100%' : 'auto', textAlign: 'center' }}
+    >
+      Enroll Now
+    </Link>
+  );
+};
 
 export default function Navbar() {
   const [scrolled,  setScrolled]  = useState(false);
   const [menuOpen,  setMenuOpen]  = useState(false);
   const [loggedIn,  setLoggedIn]  = useState(false);
   const [username,  setUsername]  = useState('');
+  const [role,      setRole]      = useState('');
   const pathname = usePathname();
 
   // Scroll listener
@@ -23,14 +66,11 @@ export default function Navbar() {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  // Close mobile menu on route change
-  useEffect(() => { setMenuOpen(false); }, [pathname]);
-
   // Check auth state from localStorage — runs on mount and on every route change
   useEffect(() => {
     const checkAuth = () => {
       const token = localStorage.getItem('userToken') || localStorage.getItem('adminToken');
-      if (!token) { setLoggedIn(false); setUsername(''); return; }
+      if (!token) { setLoggedIn(false); setUsername(''); setRole(''); return; }
 
       // Decode JWT payload (no verification needed here — just for display)
       try {
@@ -39,13 +79,14 @@ export default function Navbar() {
         if (payload.exp && payload.exp * 1000 < Date.now()) {
           localStorage.removeItem('userToken');
           localStorage.removeItem('adminToken');
-          setLoggedIn(false); setUsername('');
+          setLoggedIn(false); setUsername(''); setRole('');
           return;
         }
         setLoggedIn(true);
         setUsername(payload.username || '');
+        setRole(payload.role || '');
       } catch {
-        setLoggedIn(false); setUsername('');
+        setLoggedIn(false); setUsername(''); setRole('');
       }
     };
 
@@ -61,44 +102,8 @@ export default function Navbar() {
     localStorage.removeItem('adminToken');
     setLoggedIn(false);
     setUsername('');
+    setRole('');
     window.location.href = '/';
-  };
-
-  // ── Auth button — shown in both desktop and mobile ──────────────────────
-  const AuthButton = ({ mobile = false }) => {
-    if (loggedIn) {
-      return (
-        <div style={{ display: 'flex', alignItems: 'center', gap: '10px', flexDirection: mobile ? 'column' : 'row', width: mobile ? '100%' : 'auto' }}>
-          <span style={{
-            fontSize: '0.82rem', color: 'var(--text-muted)',
-            background: 'var(--bg-surface)',
-            border: '1px solid var(--border)',
-            borderRadius: '999px',
-            padding: '5px 14px',
-            whiteSpace: 'nowrap',
-          }}>
-            👤 {username}
-          </span>
-          <button
-            onClick={handleLogout}
-            className="btn-outline"
-            style={{ padding: '7px 18px', fontSize: '0.85rem', width: mobile ? '100%' : 'auto' }}
-          >
-            Sign Out
-          </button>
-        </div>
-      );
-    }
-
-    return (
-      <Link
-        href="/register"
-        className="btn-primary"
-        style={{ padding: '9px 22px', fontSize: '0.88rem', width: mobile ? '100%' : 'auto', textAlign: 'center' }}
-      >
-        Enroll Now
-      </Link>
-    );
   };
 
   return (
@@ -117,7 +122,7 @@ export default function Navbar() {
               fontFamily: 'Playfair Display, serif',
               fontWeight: '700', fontSize: '1rem', color: '#fff',
               flexShrink: 0
-            }}>S</div>
+            }}>SB</div>
             <span style={{
               fontFamily: 'Playfair Display, serif',
               fontWeight: '700',
@@ -125,7 +130,7 @@ export default function Navbar() {
               color: '#F1F5F9',
               letterSpacing: '-0.01em'
             }}>
-              SQTS
+              Shree Balaji
             </span>
           </Link>
 
@@ -134,12 +139,12 @@ export default function Navbar() {
             {NAV_LINKS.map(({ href, label }) => {
               const isActive = href === '/' ? pathname === '/' : pathname.startsWith(href);
               return (
-                <Link key={href} href={href} className={`nav-link${isActive ? ' active' : ''}`}>
+                <Link key={href} href={href} className={`nav-link${isActive ? ' active' : ''}`} onClick={() => setMenuOpen(false)}>
                   {label}
                 </Link>
               );
             })}
-            <AuthButton />
+            <AuthButton loggedIn={loggedIn} username={username} role={role} handleLogout={handleLogout} />
           </div>
 
           {/* Hamburger */}
@@ -156,10 +161,10 @@ export default function Navbar() {
         {/* ── Mobile menu ── */}
         <div className={`mobile-menu${menuOpen ? ' open' : ''}`}>
           {NAV_LINKS.map(({ href, label }) => (
-            <Link key={href} href={href} className="mobile-nav-link">{label}</Link>
+            <Link key={href} href={href} className="mobile-nav-link" onClick={() => setMenuOpen(false)}>{label}</Link>
           ))}
           <div style={{ marginTop: '8px' }}>
-            <AuthButton mobile />
+            <AuthButton mobile loggedIn={loggedIn} username={username} role={role} handleLogout={handleLogout} />
           </div>
         </div>
       </div>

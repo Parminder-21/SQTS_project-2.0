@@ -64,7 +64,7 @@ export default function ChooseYourPath() {
               Choose Your <span className="text-gradient">Learning Path</span>
             </h2>
             <p style={{ maxWidth: '520px', margin: '0 auto', fontSize: '1rem' }}>
-              Whether you're a school student, college learner, job seeker, or internship aspirant — we have a program built for you.
+              Whether you&apos;re a school student, college learner, job seeker, or internship aspirant — we have a program built for you.
             </p>
           </motion.div>
 

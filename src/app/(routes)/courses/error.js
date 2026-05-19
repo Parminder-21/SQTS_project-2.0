@@ -11,7 +11,7 @@ export default function CoursesError({ error, reset }) {
         <div style={{ fontSize: '3.5rem', marginBottom: '20px' }}>⚠️</div>
         <h1 style={{ fontSize: '1.8rem', marginBottom: '12px' }}>Something went wrong</h1>
         <p style={{ marginBottom: '32px', maxWidth: '400px', margin: '0 auto 32px' }}>
-          We couldn't load the courses right now. This is usually a temporary issue.
+          We couldn&apos;t load the courses right now. This is usually a temporary issue.
         </p>
         <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
           <button onClick={reset} className="btn-primary" style={{ padding: '11px 28px' }}>Try Again</button>

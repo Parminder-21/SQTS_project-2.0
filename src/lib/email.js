@@ -40,7 +40,7 @@ export const transporter = createTransporter();
  */
 export const sendEmail = async (options) => {
   try {
-    const from = process.env.SMTP_FROM || '"SQTS System" <noreply@sqts.example.com>';
+    const from = process.env.SMTP_FROM || '"Shree Balaji" <noreply@shreebalaji.in>';
     const info = await transporter.sendMail({
       from,
       ...options,
@@ -66,16 +66,16 @@ export const sendWelcomeEmail = async (email, username) => {
 
   return sendEmail({
     to: email,
-    subject: 'Welcome to SQTS Platform!',
+    subject: 'Welcome to Shree Balaji Platform!',
     html: `
       <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
         <h2 style="color: #4f46e5;">Welcome, ${username}!</h2>
-        <p>Thank you for registering at SQTS. We're excited to have you onboard.</p>
+        <p>Thank you for registering at Shree Balaji. We're excited to have you onboard.</p>
         <p>Start exploring our premium courses and take your tech career to the next level.</p>
         <br/>
-        <p>Best regards,<br/>The SQTS Team</p>
+        <p>Best regards,<br/>The Shree Balaji Team</p>
       </div>
     `,
-    text: `Welcome ${username}! Thank you for registering at SQTS. Start exploring our premium courses today.`
+    text: `Welcome ${username}! Thank you for registering at Shree Balaji. Start exploring our premium courses today.`
   });
 };

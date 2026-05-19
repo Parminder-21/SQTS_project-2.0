@@ -16,7 +16,7 @@ export async function generateMetadata({ params }) {
   const course = getCourseById(id);
   if (!course) return { title: 'Course Not Found' };
   return {
-    title: `${course.title} | SQTS Training Institute`,
+    title: `${course.title} | Shree Balaji Coaching Institute`,
     description: course.tagline || course.description,
   };
 }

@@ -98,7 +98,7 @@ export default function HeroSection({ loggedIn }) {
             variants={fadeUp}
             style={{ fontSize: '1.05rem', lineHeight: '1.8', maxWidth: '580px', margin: '0 auto 36px', color: 'var(--text-muted)' }}
           >
-            From school coaching to job-ready tech skills — SQTS Training Institute offers practical, mentor-led programs with real projects and dedicated placement support.
+            From school coaching to job-ready tech skills — Shree Balaji Coaching Institute offers practical, mentor-led programs with real projects and dedicated placement support.
           </motion.p>
 
           {/* 3 CTAs */}

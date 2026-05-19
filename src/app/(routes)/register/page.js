@@ -38,10 +38,25 @@ function RegisterContent() {
   const [loading, setLoading]                 = useState(false);
   const [error, setError]                     = useState('');
   const [success, setSuccess]                 = useState('');
+  const [alreadyLoggedIn, setAlreadyLoggedIn] = useState(false);
 
   // If a type param is present, default to register mode
   useEffect(() => {
     if (typeParam && !isLogin) setIsLogin(false);
+    
+    // Check if already logged in
+    const token = localStorage.getItem('userToken') || localStorage.getItem('adminToken');
+    if (token) {
+      try {
+        const payload = JSON.parse(atob(token.split('.')[1]));
+        if (payload.exp && payload.exp * 1000 > Date.now()) {
+          setAlreadyLoggedIn(true);
+        } else if (!payload.exp) {
+          setAlreadyLoggedIn(true);
+        }
+      } catch (e) {}
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [typeParam]);
 
   const handleSubmit = async (e) => {
@@ -59,6 +74,15 @@ function RegisterContent() {
       if (data.token) {
         localStorage.setItem('userToken', data.token);
         if (data.refreshToken) localStorage.setItem('userRefreshToken', data.refreshToken);
+        
+        try {
+          const payload = JSON.parse(atob(data.token.split('.')[1]));
+          setSuccess(`${isLogin ? 'Login' : 'Registration'} successful! Redirecting…`);
+          setTimeout(() => {
+            window.location.href = payload.role === 'admin' ? '/admin' : '/dashboard';
+          }, 1200);
+          return;
+        } catch (err) {}
       }
       setSuccess(`${isLogin ? 'Login' : 'Registration'} successful! Redirecting…`);
       setTimeout(() => { window.location.href = '/'; }, 1200);
@@ -80,6 +104,15 @@ function RegisterContent() {
       if (data.token) {
         localStorage.setItem('userToken', data.token);
         if (data.refreshToken) localStorage.setItem('userRefreshToken', data.refreshToken);
+        
+        try {
+          const payload = JSON.parse(atob(data.token.split('.')[1]));
+          setSuccess('Login successful! Redirecting…');
+          setTimeout(() => {
+            window.location.href = payload.role === 'admin' ? '/admin' : '/dashboard';
+          }, 1200);
+          return;
+        } catch (err) {}
       }
       setSuccess('Login successful! Redirecting…');
       setTimeout(() => { window.location.href = '/'; }, 1200);
@@ -120,6 +153,32 @@ function RegisterContent() {
   const title    = typeConfig?.title    || (isLogin ? 'Sign In'         : 'Create Account');
   const subtitle = typeConfig?.subtitle || (isLogin ? 'Sign in to access your courses and dashboard.' : 'Join 500+ students building their tech careers.');
   const ctaLabel = typeConfig?.cta      || (isLogin ? 'Sign In'         : 'Create Account');
+
+  if (alreadyLoggedIn) {
+    return (
+      <AuthLayout badge={badge} title={title} subtitle="You are already logged in!">
+        <div style={{ textAlign: 'center' }}>
+           <div style={{ fontSize: '3rem', marginBottom: '16px' }}>✅</div>
+           <h3 style={{ marginBottom: '16px' }}>Ready to proceed?</h3>
+           {success && <div className="alert-success" style={{ marginBottom: '20px' }}>{success}</div>}
+           <button onClick={() => {
+              setLoading(true);
+              setSuccess('Request submitted successfully! Redirecting...');
+              setTimeout(() => { window.location.href = '/'; }, 1500);
+           }} className="btn-primary" style={{ width: '100%', padding: '14px' }} disabled={loading || success}>
+             {loading ? 'Processing...' : (typeConfig?.cta || 'Confirm Application')}
+           </button>
+           <button onClick={() => {
+              localStorage.removeItem('userToken');
+              localStorage.removeItem('adminToken');
+              setAlreadyLoggedIn(false);
+           }} className="btn-outline" style={{ width: '100%', padding: '14px', marginTop: '12px' }} disabled={loading || success}>
+             Sign Out
+           </button>
+        </div>
+      </AuthLayout>
+    );
+  }
 
   return (
     <AuthLayout badge={badge} title={title} subtitle={subtitle}>
@@ -187,7 +246,7 @@ function AuthLayout({ badge, title, subtitle, children }) {
         <div style={{ textAlign: 'center', marginBottom: '28px' }}>
           <Link href="/" style={{ textDecoration: 'none', display: 'inline-flex', alignItems: 'center', gap: '10px', justifyContent: 'center' }}>
             <div style={{ width: '40px', height: '40px', background: 'var(--primary)', borderRadius: '10px', display: 'flex', alignItems: 'center', justifyContent: 'center', fontFamily: 'Playfair Display, serif', fontWeight: '700', fontSize: '1.1rem', color: '#fff' }}>S</div>
-            <span style={{ fontFamily: 'Playfair Display, serif', fontWeight: '700', fontSize: '1.3rem', color: '#F1F5F9' }}>SQTS</span>
+            <span style={{ fontFamily: 'Playfair Display, serif', fontWeight: '700', fontSize: '1.3rem', color: '#F1F5F9' }}>Shree Balaji</span>
           </Link>
         </div>
 

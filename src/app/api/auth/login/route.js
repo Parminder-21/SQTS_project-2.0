@@ -1,5 +1,5 @@
 import { NextResponse } from 'next/server';
-import { generateToken, generateRefreshToken, verifyAdminCredentials } from '@/lib/auth';
+import { generateToken, generateRefreshToken, verifyCredentials } from '@/lib/auth';
 import { validators, validationErrorResponse } from '@/lib/validation';
 import { checkRateLimit, getClientIp, rateLimitConfigs } from '@/lib/rateLimit';
 import { getLogger } from '@/lib/logger';
@@ -38,9 +38,9 @@ export async function POST(request) {
     const { username, password } = body;
 
     // Verify credentials against the database
-    const isValid = await verifyAdminCredentials(username, password);
+    const user = await verifyCredentials(username, password);
 
-    if (!isValid) {
+    if (!user) {
       logger.warn(`Failed login attempt for username "${username}" from IP ${clientIp}`);
       return NextResponse.json(
         { error: 'Invalid username or password' },
@@ -60,7 +60,7 @@ export async function POST(request) {
     }
 
     // Generate tokens — let JWT handle iat automatically
-    const tokenPayload = { username, role: 'admin' };
+    const tokenPayload = { username: user.username, role: user.role };
     const token = generateToken(tokenPayload);
     const refreshToken = generateRefreshToken(tokenPayload);
 

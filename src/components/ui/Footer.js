@@ -22,13 +22,13 @@ export default function Footer() {
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 fontFamily: 'Playfair Display, serif',
                 fontWeight: '700', fontSize: '1rem', color: '#fff'
-              }}>S</div>
+              }}>SB</div>
               <span style={{ fontFamily: 'Playfair Display, serif', fontWeight: '700', fontSize: '1.2rem', color: '#F1F5F9' }}>
-                SQTS
+                Shree Balaji
               </span>
             </div>
             <p style={{ fontSize: '0.88rem', lineHeight: '1.6', maxWidth: '220px' }}>
-              SQTS Training Institute — practical tech education with placement support for students at every stage.
+              Shree Balaji Coaching Institute — practical tech education with placement support for students at every stage.
             </p>
           </div>
 
@@ -57,8 +57,9 @@ export default function Footer() {
                 ['Home',        '/'],
                 ['All Courses', '/courses'],
                 ['Alumni',      '/alumni'],
-                ['Internships', '/register?type=internship'],
-                ['Free Demo',   '/register?type=demo'],
+                ['Contact',     '/contact'],
+                ['Free Demo',   '/contact?type=demo'],
+                ['Internships', '/contact?type=internship'],
                 ['Register',    '/register'],
               ].map(([label, href]) => (
                 <Link key={label} href={href} style={{ color: 'var(--text-muted)', textDecoration: 'none', fontSize: '0.9rem' }}>
@@ -72,7 +73,7 @@ export default function Footer() {
           <div>
             <h4 style={{ fontSize: '0.85rem', textTransform: 'uppercase', letterSpacing: '0.08em', color: '#94A3B8', marginBottom: '16px' }}>Contact</h4>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '10px', fontSize: '0.9rem', color: 'var(--text-muted)' }}>
-              <span>📧 info@sqts.in</span>
+              <span>📧 info@shreebalaji.in</span>
               <span>📞 +91 98765 43210</span>
               <span>📍 Chandigarh, India</span>
             </div>
@@ -90,7 +91,7 @@ export default function Footer() {
           gap: '12px'
         }}>
           <p style={{ fontSize: '0.85rem', color: 'var(--text-faint)', margin: 0 }}>
-            © {year} Sparkque Tech Solutions. All rights reserved.
+            © {year} Shree Balaji Coaching Institute. All rights reserved.
           </p>
           <div style={{ display: 'flex', gap: '20px' }}>
             {['Privacy Policy', 'Terms of Service'].map(t => (

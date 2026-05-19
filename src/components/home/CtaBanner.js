@@ -12,7 +12,7 @@ export default function CtaBanner({ loggedIn }) {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
           style={{
-            background: 'linear-gradient(135deg, #1E3A8A 0%, #1D4ED8 60%, #0369A1 100%)',
+            background: 'linear-gradient(135deg, #1E1B4B 0%, #3730A3 50%, #4F46E5 100%)',
             borderRadius: 'var(--radius-xl)',
             padding: 'clamp(40px, 6vw, 64px)',
             textAlign: 'center',
@@ -72,7 +72,7 @@ export default function CtaBanner({ loggedIn }) {
             <div style={{ display: 'flex', gap: '12px', justifyContent: 'center', flexWrap: 'wrap' }}>
               {loggedIn ? (
                 <Link href="/courses" style={{
-                  background: '#fff', color: '#1D4ED8',
+                  background: '#fff', color: '#3730A3',
                   padding: '13px 32px', borderRadius: 'var(--radius-md)',
                   fontWeight: '700', textDecoration: 'none', fontSize: '1rem',
                 }}>
@@ -81,13 +81,13 @@ export default function CtaBanner({ loggedIn }) {
               ) : (
                 <>
                   <Link href="/register" style={{
-                    background: '#fff', color: '#1D4ED8',
+                    background: '#fff', color: '#3730A3',
                     padding: '13px 28px', borderRadius: 'var(--radius-md)',
                     fontWeight: '700', textDecoration: 'none', fontSize: '0.95rem',
                   }}>
                     Enroll Now
                   </Link>
-                  <Link href="/register?type=demo" style={{
+                  <Link href="/contact?type=demo" style={{
                     background: 'rgba(255,255,255,0.12)',
                     border: '1.5px solid rgba(255,255,255,0.3)',
                     color: '#fff',
@@ -96,10 +96,23 @@ export default function CtaBanner({ loggedIn }) {
                   }}>
                     Book Free Demo
                   </Link>
+                  <a
+                    href="https://wa.me/919876543210?text=Hi%2C%20I%20want%20to%20talk%20to%20a%20counsellor%20at%20Shree Balaji."
+                    target="_blank" rel="noopener noreferrer"
+                    style={{
+                      background: 'rgba(37,211,102,0.2)',
+                      border: '1.5px solid rgba(37,211,102,0.4)',
+                      color: '#4ADE80',
+                      padding: '12px 28px', borderRadius: 'var(--radius-md)',
+                      fontWeight: '600', textDecoration: 'none', fontSize: '0.95rem',
+                    }}
+                  >
+                    Talk to Counsellor
+                  </a>
                   <Link href="/register?type=internship" style={{
-                    background: 'rgba(16,185,129,0.2)',
-                    border: '1.5px solid rgba(16,185,129,0.4)',
-                    color: '#6EE7B7',
+                    background: 'rgba(124,58,237,0.2)',
+                    border: '1.5px solid rgba(124,58,237,0.4)',
+                    color: '#C4B5FD',
                     padding: '12px 28px', borderRadius: 'var(--radius-md)',
                     fontWeight: '600', textDecoration: 'none', fontSize: '0.95rem',
                   }}>
