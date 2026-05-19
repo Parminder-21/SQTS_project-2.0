@@ -62,10 +62,12 @@ export const validators = {
   },
 
   /**
-   * Validate numeric ID
+   * Validate course ID — accepts numeric IDs or slug strings (e.g. 'python', 'mern-stack')
    */
   validateId(id) {
-    return !isNaN(parseInt(id, 10)) && parseInt(id, 10) > 0;
+    if (!id || typeof id !== 'string') return false;
+    // Accept numeric IDs (legacy) or slug strings (letters, numbers, hyphens)
+    return /^[a-z0-9][a-z0-9-]*[a-z0-9]$|^[a-z0-9]$/.test(id) || (!isNaN(parseInt(id, 10)) && parseInt(id, 10) > 0);
   },
 
   /**

@@ -1,65 +1,310 @@
 [
   {
-    "id": "1",
-    "title": "Full Stack Web Development",
-    "category": "Web Development",
-    "description": "Master modern web development with React, Node.js, and databases. Learn to build production-ready applications.",
-    "duration": "12 weeks",
-    "image": "/images/courses/web-dev.jpg",
-    "icon": "⚡",
+    "id": "c-programming",
+    "title": "C Programming",
+    "category": "Programming",
+    "description": "C Programming is the foundation of all modern software. This course takes you from zero to confident — covering variables, loops, functions, pointers, and file handling with hands-on practice every step of the way.",
+    "duration": "6 weeks",
+    "image": "",
+    "icon": "⚙️",
     "modules": [
-      { "title": "HTML & CSS Fundamentals", "duration": "2 weeks" },
-      { "title": "JavaScript Basics", "duration": "2 weeks" },
-      { "title": "React & Frontend", "duration": "3 weeks" },
-      { "title": "Node.js & Backend", "duration": "3 weeks" },
-      { "title": "Databases & APIs", "duration": "2 weeks" }
+      { "title": "Introduction to C & Setup", "details": "History of C, setting up the environment, first program.", "topics": ["History of C", "GCC Setup", "Hello World", "Compilation Process"] },
+      { "title": "Variables, Data Types & Operators", "details": "Core building blocks of any C program.", "topics": ["int, float, char", "Arithmetic Operators", "Relational Operators", "Type Casting"] },
+      { "title": "Control Flow", "details": "Decision making and loops.", "topics": ["if/else", "switch", "for loop", "while loop", "do-while", "break/continue"] },
+      { "title": "Functions & Recursion", "details": "Modular programming and recursive thinking.", "topics": ["Function Declaration", "Parameters & Return", "Recursion", "Scope & Lifetime"] },
+      { "title": "Arrays & Strings", "details": "Working with collections of data.", "topics": ["1D & 2D Arrays", "String Functions", "Character Arrays", "Sorting Algorithms"] },
+      { "title": "Pointers & Memory", "details": "The most powerful feature of C.", "topics": ["Pointer Basics", "Pointer Arithmetic", "Dynamic Memory", "malloc/free"] },
+      { "title": "Structures & File Handling", "details": "Organising data and persisting it.", "topics": ["struct & union", "typedef", "File I/O", "fread/fwrite"] }
     ],
     "packages": [
-      { "name": "Starter", "price": "$299", "features": ["Video Lessons", "2 Projects"] },
-      { "name": "Professional", "price": "$599", "features": ["Video Lessons", "5 Projects", "Job Support"] },
-      { "name": "Premium", "price": "$899", "features": ["All Features", "1-on-1 Mentoring", "Lifetime Access"] }
+      { "name": "Basic", "price": "₹2,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹4,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹7,999", "includes": "Everything in Standard + internship + placement support" }
     ]
   },
   {
-    "id": "2",
-    "title": "Data Science & Machine Learning",
-    "category": "Data Science",
-    "description": "Learn data analysis, visualization, and machine learning with Python. Build AI-powered solutions.",
+    "id": "cpp",
+    "title": "C++ Programming",
+    "category": "Programming",
+    "description": "C++ extends C with powerful object-oriented features. This course covers OOP concepts, STL, templates, and modern C++ practices used in competitive programming and software development.",
+    "duration": "8 weeks",
+    "image": "",
+    "icon": "🔷",
+    "modules": [
+      { "title": "C++ Basics & OOP Intro", "details": "From C to C++, classes and objects.", "topics": ["Classes & Objects", "Constructors", "Destructors", "Access Specifiers"] },
+      { "title": "Inheritance & Polymorphism", "details": "Code reuse and runtime behaviour.", "topics": ["Single Inheritance", "Multiple Inheritance", "Virtual Functions", "Overriding"] },
+      { "title": "Templates & STL", "details": "Generic programming and standard library.", "topics": ["Function Templates", "Class Templates", "vector, map, set", "Iterators"] },
+      { "title": "Exception Handling", "details": "Writing robust, error-safe code.", "topics": ["try/catch/throw", "Custom Exceptions", "RAII Pattern"] },
+      { "title": "File I/O & Streams", "details": "Reading and writing files in C++.", "topics": ["ifstream/ofstream", "Serialisation", "Binary Files"] },
+      { "title": "Modern C++ (C++11/14/17)", "details": "Smart pointers, lambdas, and range-based loops.", "topics": ["auto", "Lambda", "Smart Pointers", "Move Semantics"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹3,499", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹5,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹8,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "java",
+    "title": "Java Programming",
+    "category": "Programming",
+    "description": "Java is the backbone of enterprise applications, Android apps, and backend systems. This comprehensive course covers core Java, OOP, collections, multithreading, and JDBC — everything you need to get hired.",
+    "duration": "10 weeks",
+    "image": "",
+    "icon": "☕",
+    "modules": [
+      { "title": "Java Fundamentals", "details": "JVM, JDK, syntax, and first programs.", "topics": ["JVM Architecture", "Data Types", "Operators", "Control Flow"] },
+      { "title": "Object-Oriented Programming", "details": "Classes, objects, and OOP pillars.", "topics": ["Classes & Objects", "Inheritance", "Polymorphism", "Abstraction", "Encapsulation"] },
+      { "title": "Collections Framework", "details": "Working with data structures in Java.", "topics": ["ArrayList", "HashMap", "LinkedList", "Iterator", "Generics"] },
+      { "title": "Exception Handling & I/O", "details": "Robust error handling and file operations.", "topics": ["try/catch/finally", "Custom Exceptions", "File I/O", "Serialisation"] },
+      { "title": "Multithreading & Concurrency", "details": "Writing concurrent Java programs.", "topics": ["Thread Class", "Runnable", "Synchronisation", "Executor Service"] },
+      { "title": "JDBC & Database", "details": "Connecting Java to MySQL.", "topics": ["JDBC Setup", "CRUD Operations", "PreparedStatement", "Connection Pooling"] },
+      { "title": "Java 8+ Features", "details": "Modern Java for industry use.", "topics": ["Lambda Expressions", "Stream API", "Optional", "Functional Interfaces"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹3,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹6,499", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹9,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "python",
+    "title": "Python Programming",
+    "category": "Programming",
+    "description": "Python is the #1 language for data science, AI, web development, and automation. This course takes you from basics to building real projects — with clean, readable code that employers love.",
+    "duration": "8 weeks",
+    "image": "",
+    "icon": "🐍",
+    "modules": [
+      { "title": "Python Basics", "details": "Syntax, variables, and control flow.", "topics": ["Variables & Types", "Lists & Tuples", "Dictionaries", "Loops", "Functions"] },
+      { "title": "OOP in Python", "details": "Classes, objects, and Pythonic patterns.", "topics": ["Classes & Objects", "Inheritance", "Magic Methods", "Decorators"] },
+      { "title": "File Handling & Modules", "details": "Working with files and organising code.", "topics": ["File I/O", "JSON & CSV", "Modules & Packages", "Virtual Environments"] },
+      { "title": "Libraries: NumPy & Pandas", "details": "Data manipulation essentials.", "topics": ["NumPy Arrays", "Pandas DataFrames", "Data Cleaning", "Aggregation"] },
+      { "title": "Data Visualisation", "details": "Turning data into insights.", "topics": ["Matplotlib", "Seaborn", "Plotly", "Chart Types"] },
+      { "title": "Web Scraping & Automation", "details": "Practical Python for real tasks.", "topics": ["requests", "BeautifulSoup", "Selenium Basics", "Task Automation"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹3,499", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹5,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹8,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "mern-stack",
+    "title": "MERN Stack Development",
+    "category": "Web Development",
+    "description": "The MERN stack is the most popular full-stack JavaScript framework used by startups and enterprises alike. This course takes you from frontend to backend — building real, deployable applications.",
     "duration": "14 weeks",
-    "image": "/images/courses/data-science.jpg",
+    "image": "",
+    "icon": "🌐",
+    "modules": [
+      { "title": "HTML, CSS & JavaScript Refresh", "details": "Solid foundation before diving into the stack.", "topics": ["Semantic HTML", "CSS Flexbox/Grid", "ES6+", "DOM Manipulation"] },
+      { "title": "React Fundamentals", "details": "Building interactive UIs with React.", "topics": ["Components", "Props & State", "Hooks", "React Router", "Context API"] },
+      { "title": "Node.js & Express", "details": "Server-side JavaScript and REST APIs.", "topics": ["Node.js Basics", "Express Setup", "REST API Design", "Middleware", "Authentication"] },
+      { "title": "MongoDB & Mongoose", "details": "NoSQL database for modern apps.", "topics": ["MongoDB Basics", "Mongoose ODM", "CRUD Operations", "Aggregation", "Indexing"] },
+      { "title": "Authentication & Security", "details": "JWT, bcrypt, and secure APIs.", "topics": ["JWT Auth", "bcrypt", "Protected Routes", "CORS", "Rate Limiting"] },
+      { "title": "Deployment & DevOps Basics", "details": "Taking your app live.", "topics": ["Vercel / Render", "MongoDB Atlas", "Environment Variables", "CI/CD Basics"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹5,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹9,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹14,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "web-development",
+    "title": "Web Development",
+    "category": "Web Development",
+    "description": "Learn to build modern, responsive websites from scratch. This course covers HTML, CSS, JavaScript, and introduces you to frameworks — giving you everything needed to start freelancing or land a web dev job.",
+    "duration": "10 weeks",
+    "image": "",
+    "icon": "💻",
+    "modules": [
+      { "title": "HTML Fundamentals", "details": "Structure of the web.", "topics": ["HTML5 Tags", "Semantic HTML", "Forms", "Tables", "Accessibility"] },
+      { "title": "CSS & Styling", "details": "Making websites look great.", "topics": ["Selectors", "Box Model", "Flexbox", "CSS Grid", "Animations", "Responsive Design"] },
+      { "title": "JavaScript Essentials", "details": "Making websites interactive.", "topics": ["Variables", "Functions", "DOM Manipulation", "Events", "Fetch API"] },
+      { "title": "Bootstrap & Tailwind", "details": "CSS frameworks for faster development.", "topics": ["Bootstrap Grid", "Components", "Tailwind Utility Classes", "Dark Mode"] },
+      { "title": "Git & GitHub", "details": "Version control for developers.", "topics": ["Git Basics", "Branching", "Pull Requests", "GitHub Pages"] },
+      { "title": "Deployment & Hosting", "details": "Taking your site live.", "topics": ["Netlify", "Vercel", "Custom Domain", "Performance Basics"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹3,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹6,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹10,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "wordpress",
+    "title": "WordPress Development",
+    "category": "Web Development",
+    "description": "WordPress powers 43% of the internet. Learn to build, customise, and manage WordPress websites — from blogs to e-commerce stores — and start freelancing immediately after the course.",
+    "duration": "5 weeks",
+    "image": "",
+    "icon": "🔵",
+    "modules": [
+      { "title": "WordPress Setup & Hosting", "details": "Getting your site online.", "topics": ["Hosting Setup", "Domain & SSL", "WordPress Install", "Dashboard Tour"] },
+      { "title": "Themes & Customisation", "details": "Making your site look professional.", "topics": ["Theme Selection", "Elementor Page Builder", "Header/Footer", "Typography & Colors"] },
+      { "title": "Plugins & Functionality", "details": "Extending WordPress.", "topics": ["Essential Plugins", "Contact Forms", "SEO with Yoast", "Security Plugins"] },
+      { "title": "WooCommerce E-Commerce", "details": "Selling online with WordPress.", "topics": ["Product Setup", "Payment Gateways", "Shipping", "Order Management"] },
+      { "title": "SEO & Performance", "details": "Getting found on Google.", "topics": ["On-Page SEO", "Speed Optimisation", "Caching", "Image Optimisation"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹2,499", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹4,499", "includes": "Everything in Basic + 2 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹6,999", "includes": "Everything in Standard + internship + freelance guidance" }
+    ]
+  },
+  {
+    "id": "shopify",
+    "title": "Shopify Store Development",
+    "category": "Web Development",
+    "description": "Shopify is the world's leading e-commerce platform. Learn to build, customise, and market Shopify stores — a high-demand skill for freelancers and digital agencies.",
+    "duration": "4 weeks",
+    "image": "",
+    "icon": "🛍️",
+    "modules": [
+      { "title": "Shopify Setup & Products", "details": "Getting your store ready.", "topics": ["Store Setup", "Product Listings", "Collections", "Inventory"] },
+      { "title": "Theme Customisation", "details": "Making your store unique.", "topics": ["Theme Editor", "Sections & Blocks", "Liquid Basics", "Custom CSS"] },
+      { "title": "Payments & Shipping", "details": "Taking orders and fulfilling them.", "topics": ["Payment Gateways", "Shipping Zones", "Tax Setup", "Order Management"] },
+      { "title": "Apps & Integrations", "details": "Extending your store.", "topics": ["Essential Apps", "Email Marketing", "Reviews", "Upsell Apps"] },
+      { "title": "Marketing & SEO", "details": "Driving traffic and sales.", "topics": ["Shopify SEO", "Meta Ads Basics", "Google Shopping", "Analytics"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹2,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹4,999", "includes": "Everything in Basic + 2 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹7,499", "includes": "Everything in Standard + freelance client guidance" }
+    ]
+  },
+  {
+    "id": "ai-tools",
+    "title": "AI Tools & Prompt Engineering",
+    "category": "AI & Future Tech",
+    "description": "AI is not replacing people — it's replacing people who don't use AI. This practical course teaches you to use ChatGPT, Midjourney, Copilot, and other AI tools to 10x your productivity in any field.",
+    "duration": "4 weeks",
+    "image": "",
+    "icon": "🤖",
+    "modules": [
+      { "title": "Introduction to AI & LLMs", "details": "How AI works and why it matters.", "topics": ["What is AI?", "LLMs Explained", "ChatGPT vs Claude", "AI Ethics"] },
+      { "title": "Prompt Engineering", "details": "Getting the best results from AI.", "topics": ["Prompt Structure", "Chain of Thought", "Few-Shot Prompting", "System Prompts"] },
+      { "title": "AI for Content & Writing", "details": "Writing, editing, and content creation.", "topics": ["Blog Writing", "Email Drafting", "Social Media", "SEO Content"] },
+      { "title": "AI for Images & Design", "details": "Visual content generation.", "topics": ["Midjourney", "DALL-E", "Canva AI", "Image Prompting"] },
+      { "title": "AI for Productivity & Coding", "details": "Automating work with AI.", "topics": ["GitHub Copilot", "Notion AI", "Zapier AI", "Code Generation"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹1,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹3,499", "includes": "Everything in Basic + projects + doubt sessions" },
+      { "name": "Premium", "price": "₹5,499", "includes": "Everything in Standard + 1-on-1 mentoring" }
+    ]
+  },
+  {
+    "id": "data-analysis",
+    "title": "Data Analysis",
+    "category": "AI & Future Tech",
+    "description": "Data Analysis is one of the highest-paying entry-level tech skills. This course teaches you Excel, SQL, Python, and Power BI — the complete toolkit for a data analyst role.",
+    "duration": "10 weeks",
+    "image": "",
     "icon": "📊",
     "modules": [
-      { "title": "Python for Data Science", "duration": "2 weeks" },
-      { "title": "Data Analysis & Pandas", "duration": "2 weeks" },
-      { "title": "Visualization & Statistics", "duration": "2 weeks" },
-      { "title": "Machine Learning Basics", "duration": "4 weeks" },
-      { "title": "Advanced ML & Deep Learning", "duration": "4 weeks" }
+      { "title": "Excel for Data Analysis", "details": "The most used tool in every office.", "topics": ["Pivot Tables", "VLOOKUP/XLOOKUP", "Charts", "Data Validation", "Macros Intro"] },
+      { "title": "SQL Fundamentals", "details": "Querying databases like a pro.", "topics": ["SELECT & WHERE", "JOINs", "GROUP BY", "Subqueries", "Window Functions"] },
+      { "title": "Python for Data Analysis", "details": "Pandas and NumPy for data work.", "topics": ["DataFrames", "Data Cleaning", "Merging", "Aggregation", "EDA"] },
+      { "title": "Data Visualisation", "details": "Communicating insights visually.", "topics": ["Matplotlib", "Seaborn", "Power BI Basics", "Dashboard Design"] },
+      { "title": "Statistics for Analysts", "details": "The math behind the insights.", "topics": ["Descriptive Stats", "Probability", "Hypothesis Testing", "Correlation"] },
+      { "title": "Capstone Project", "details": "End-to-end analysis project.", "topics": ["Problem Framing", "Data Collection", "Analysis", "Presentation"] }
     ],
     "packages": [
-      { "name": "Starter", "price": "$349", "features": ["Video Lessons", "Notebooks", "3 Projects"] },
-      { "name": "Professional", "price": "$649", "features": ["Video Lessons", "Notebooks", "8 Projects", "Job Support"] },
-      { "name": "Premium", "price": "$999", "features": ["All Features", "Research Papers", "Portfolio Building"] }
+      { "name": "Basic", "price": "₹4,499", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹7,499", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹11,999", "includes": "Everything in Standard + internship + placement support" }
     ]
   },
   {
-    "id": "3",
-    "title": "Digital Marketing Mastery",
-    "category": "Marketing",
-    "description": "Become an expert in SEO, SEM, social media, and content marketing. Drive real business results.",
-    "duration": "10 weeks",
-    "image": "/images/courses/digital-marketing.jpg",
-    "icon": "📈",
+    "id": "cyber-security",
+    "title": "Cyber Security",
+    "category": "AI & Future Tech",
+    "description": "Cyber Security is one of the fastest-growing fields with a massive talent shortage. This course covers ethical hacking, network security, and security operations — preparing you for certifications and jobs.",
+    "duration": "12 weeks",
+    "image": "",
+    "icon": "🔐",
     "modules": [
-      { "title": "SEO Fundamentals", "duration": "2 weeks" },
-      { "title": "PPC & Google Ads", "duration": "2 weeks" },
-      { "title": "Social Media Marketing", "duration": "2 weeks" },
-      { "title": "Content & Email Marketing", "duration": "2 weeks" },
-      { "title": "Analytics & Strategy", "duration": "2 weeks" }
+      { "title": "Networking Fundamentals", "details": "The foundation of all security work.", "topics": ["OSI Model", "TCP/IP", "DNS/DHCP", "Firewalls", "VPN"] },
+      { "title": "Linux for Security", "details": "Kali Linux and command-line tools.", "topics": ["Linux Basics", "File Permissions", "Bash Scripting", "Kali Tools"] },
+      { "title": "Ethical Hacking & Recon", "details": "Thinking like an attacker.", "topics": ["Footprinting", "Scanning with Nmap", "OSINT", "Social Engineering"] },
+      { "title": "Exploitation & Post-Exploitation", "details": "Controlled attack techniques.", "topics": ["Metasploit", "Password Cracking", "Privilege Escalation", "Persistence"] },
+      { "title": "Web Application Security", "details": "OWASP Top 10 and beyond.", "topics": ["SQL Injection", "XSS", "CSRF", "Burp Suite", "OWASP Top 10"] },
+      { "title": "Incident Response & Forensics", "details": "Defending and investigating.", "topics": ["Log Analysis", "SIEM Basics", "Incident Response", "Digital Forensics"] }
     ],
     "packages": [
-      { "name": "Starter", "price": "$199", "features": ["Video Lessons", "2 Case Studies"] },
-      { "name": "Professional", "price": "$399", "features": ["Video Lessons", "5 Case Studies", "Job Support"] },
-      { "name": "Premium", "price": "$699", "features": ["All Features", "Live Workshops", "Certification"] }
+      { "name": "Basic", "price": "₹5,499", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹8,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹13,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "aws",
+    "title": "AWS Cloud Computing",
+    "category": "AI & Future Tech",
+    "description": "Amazon Web Services powers 33% of the internet. This course prepares you for the AWS Solutions Architect Associate exam while teaching you to deploy real applications on the cloud.",
+    "duration": "10 weeks",
+    "image": "",
+    "icon": "☁️",
+    "modules": [
+      { "title": "Cloud Fundamentals & AWS Intro", "details": "What is cloud and why AWS.", "topics": ["Cloud Models", "AWS Global Infrastructure", "IAM", "Billing & Free Tier"] },
+      { "title": "Compute: EC2 & Lambda", "details": "Running applications on AWS.", "topics": ["EC2 Instances", "AMIs", "Security Groups", "Lambda Functions", "Serverless"] },
+      { "title": "Storage: S3, EBS & RDS", "details": "Storing data in the cloud.", "topics": ["S3 Buckets", "Storage Classes", "EBS Volumes", "RDS Setup", "Backups"] },
+      { "title": "Networking: VPC & Route 53", "details": "Cloud networking essentials.", "topics": ["VPC Setup", "Subnets", "Internet Gateway", "Route 53", "CloudFront"] },
+      { "title": "DevOps on AWS", "details": "CI/CD and infrastructure as code.", "topics": ["CodePipeline", "CodeDeploy", "CloudFormation Basics", "Docker on ECS"] },
+      { "title": "AWS Exam Prep", "details": "Preparing for AWS certifications.", "topics": ["SAA-C03 Overview", "Practice Questions", "Exam Strategy", "Mock Tests"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹5,999", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹9,499", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹13,999", "includes": "Everything in Standard + internship + placement support" }
+    ]
+  },
+  {
+    "id": "graphic-design",
+    "title": "Graphic Design & Digital Skills",
+    "category": "Design & Digital Skills",
+    "description": "Graphic design is one of the most in-demand freelance skills. This course teaches you Canva, Photoshop, and Illustrator — covering logo design, social media graphics, branding, and video editing.",
+    "duration": "8 weeks",
+    "image": "",
+    "icon": "🎨",
+    "modules": [
+      { "title": "Design Principles", "details": "The theory behind great design.", "topics": ["Colour Theory", "Typography", "Layout & Composition", "Visual Hierarchy"] },
+      { "title": "Canva Mastery", "details": "Professional design without Photoshop.", "topics": ["Templates", "Brand Kit", "Social Media Sizes", "Presentations", "Video"] },
+      { "title": "Adobe Photoshop", "details": "Industry-standard photo editing.", "topics": ["Layers & Masks", "Photo Retouching", "Compositing", "Filters & Effects"] },
+      { "title": "Adobe Illustrator", "details": "Vector graphics and logo design.", "topics": ["Pen Tool", "Logo Design", "Icons", "Typography Effects", "Export"] },
+      { "title": "Social Media & Branding", "details": "Designing for digital platforms.", "topics": ["Instagram Design", "YouTube Thumbnails", "Brand Guidelines", "Content Strategy"] },
+      { "title": "Video Editing Basics", "details": "Short-form video for social media.", "topics": ["CapCut", "Reels & Shorts", "Transitions", "Captions", "Music"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹3,499", "includes": "Video lessons, assignments, certificate" },
+      { "name": "Standard", "price": "₹5,999", "includes": "Everything in Basic + 3 projects + doubt sessions" },
+      { "name": "Premium", "price": "₹8,999", "includes": "Everything in Standard + internship + freelance guidance" }
+    ]
+  },
+  {
+    "id": "school-computer",
+    "title": "School Computer Coaching",
+    "category": "School Coaching",
+    "description": "A structured computer education program for school students covering digital literacy, MS Office, typing, internet safety, and an introduction to programming — aligned with school curriculum.",
+    "duration": "12 weeks",
+    "image": "",
+    "icon": "🏫",
+    "modules": [
+      { "title": "Computer Basics", "details": "Understanding computers and how they work.", "topics": ["Hardware & Software", "Input/Output Devices", "Operating System", "File Management"] },
+      { "title": "Typing & Keyboard Skills", "details": "Touch typing for speed and accuracy.", "topics": ["Home Row", "Touch Typing", "Typing Speed Practice", "Keyboard Shortcuts"] },
+      { "title": "MS Word", "details": "Document creation and formatting.", "topics": ["Typing & Formatting", "Tables", "Images", "Page Layout", "Printing"] },
+      { "title": "MS Excel", "details": "Spreadsheets and basic formulas.", "topics": ["Data Entry", "SUM/AVERAGE", "Charts", "Sorting & Filtering"] },
+      { "title": "MS PowerPoint", "details": "Creating presentations.", "topics": ["Slides & Layouts", "Animations", "Transitions", "Presenting"] },
+      { "title": "Internet & Digital Safety", "details": "Safe and smart internet use.", "topics": ["Browsing", "Email Basics", "Online Safety", "Cyberbullying Awareness"] },
+      { "title": "Introduction to Scratch", "details": "First steps in programming.", "topics": ["Scratch Interface", "Sprites & Backdrops", "Events & Loops", "Simple Games"] }
+    ],
+    "packages": [
+      { "name": "Basic", "price": "₹1,999", "includes": "Classes, worksheets, certificate" },
+      { "name": "Standard", "price": "₹3,499", "includes": "Everything in Basic + projects + parent progress reports" },
+      { "name": "Premium", "price": "₹4,999", "includes": "Everything in Standard + 1-on-1 sessions + exam prep" }
     ]
   }
 ]
