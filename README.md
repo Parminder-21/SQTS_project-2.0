@@ -2,7 +2,21 @@
 
 Shree Balaji Coaching Institute is a premium tech training, school coaching, and career placement platform built as a high-performance Next.js 16 web application. It showcases course syllabi, handles dynamic student registrations, supports multi-fallback lead capture, and hosts admin tools.
 
-**🚀 Live Demo:** [https://sqts-2.vercel.app](https://sqts-2.vercel.app)
+**🚀 Live Demo:** [https://sqts-project-2-0.vercel.app/](https://sqts-project-2-0.vercel.app/)
+
+---
+
+### 📖 GitHub Repository Metadata (For copy-pasting)
+If you are managing this repository on GitHub, here are the recommended descriptions and tags for the repository settings:
+
+* **About / Description:**
+  > 🚀 A premium, high-performance training & placement institute platform built with Next.js 16, featuring Framer Motion, dynamic course syllabi, multi-fallback lead generation (SQLite + Google Sheets + Formspree), placement success portal, corporate internship grid, FAQ accordions, and pulse-animated WhatsApp counsellor integration.
+* **Website:**
+  `https://sqts-project-2-0.vercel.app/`
+* **Repository Topics / Tags:**
+  `nextjs16`, `react19`, `framer-motion`, `lead-generation`, `sqlite`, `glassmorphism`, `placement-portal`, `internship-grid`, `coaching-institute`, `tech-education`, `responsive-design`, `web-development`
+
+---
 
 ## What It Includes
 

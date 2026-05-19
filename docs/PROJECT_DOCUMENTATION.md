@@ -1,6 +1,6 @@
 # Shree Balaji Coaching Institute (previously SQTS) Project Document
 
-**🚀 Live Demo Link:** [https://sqts-2.vercel.app](https://sqts-2.vercel.app)
+**🚀 Live Demo Link:** [https://sqts-project-2-0.vercel.app/](https://sqts-project-2-0.vercel.app/)
 
 ## Overview
 Shree Balaji Coaching Institute is a premium tech training, school coaching, and career placement platform built as a high-performance Next.js 16 web application. It handles student registrations, detailed dynamic course catalog pre-rendering, multi-fallback lead storage, and admin dashboards.
