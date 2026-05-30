@@ -114,15 +114,18 @@ export default function Navbar() {
 
           {/* Logo */}
           <Link href="/" style={{ textDecoration: 'none', display: 'flex', alignItems: 'center', gap: '10px' }}>
-            <div style={{
-              width: '34px', height: '34px',
-              background: 'var(--primary)',
-              borderRadius: '8px',
-              display: 'flex', alignItems: 'center', justifyContent: 'center',
-              fontFamily: 'Playfair Display, serif',
-              fontWeight: '700', fontSize: '1rem', color: '#fff',
-              flexShrink: 0
-            }}>SB</div>
+            <img
+              src="/logo.png"
+              alt="Shree Balaji Coaching Logo"
+              width={34}
+              height={34}
+              style={{
+                borderRadius: '8px',
+                objectFit: 'cover',
+                flexShrink: 0,
+                border: '1px solid var(--border)',
+              }}
+            />
             <span style={{
               fontFamily: 'Playfair Display, serif',
               fontWeight: '700',
