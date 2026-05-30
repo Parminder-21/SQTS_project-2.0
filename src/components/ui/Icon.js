@@ -36,15 +36,7 @@ import {
   Gift,
   Phone,
   Mail,
-  Check,
-  Code,
-  Cpu,
-  Sparkles,
-  Shield,
-  Award,
-  Heart,
-  Compass,
-  Zap
+  Check
 } from 'lucide-react';
 
 const ICON_MAP = {
@@ -63,33 +55,20 @@ const ICON_MAP = {
   star: Star,
   target: Target,
   help: HelpCircle,
-  award: Award,
-  heart: Heart,
-  compass: Compass,
-  zap: Zap,
 
   // Domains & Skills
   globe: Globe,
   terminal: Terminal,
-  python: Code,
-  code: Code,
-  cpu: Cpu,
+  python: Terminal,
   chart: BarChart3,
   palette: Palette,
-  design: Palette,
   megaphone: Megaphone,
-  marketing: Megaphone,
   atom: Atom,
   react: Atom,
   pen: PenTool,
   search: Search,
   smartphone: Smartphone,
-  mobile: Smartphone,
   lock: Lock,
-  security: Shield,
-  shield: Shield,
-  ai: Sparkles,
-  sparkles: Sparkles,
 
   // Features & Projects
   folder: FolderKanban,
@@ -117,23 +96,9 @@ export default function Icon({ name, color = 'currentColor', size = 20, strokeWi
   if (animate) {
     return (
       <motion.span
-        style={{ 
-          display: 'inline-flex', 
-          alignItems: 'center', 
-          justifyContent: 'center', 
-          ...style 
-        }}
-        whileHover={{ 
-          scale: 1.15, 
-          rotate: 5,
-          filter: `drop-shadow(0 0 6px ${color})`,
-        }}
-        transition={{
-          type: 'spring',
-          stiffness: 300,
-          damping: 15
-        }}
-        whileTap={{ scale: 0.92 }}
+        style={{ display: 'inline-flex', alignItems: 'center', justifyContent: 'center', ...style }}
+        whileHover={{ scale: 1.1, rotate: 3 }}
+        whileTap={{ scale: 0.95 }}
         className={className}
       >
         <IconComponent size={size} color={color} strokeWidth={strokeWidth} />
