@@ -137,7 +137,7 @@ export default async function CourseDetailPage({ params }) {
 
       {/* ── MAIN CONTENT ── */}
       <div className="container" style={{ padding: '56px 24px' }}>
-        <div style={{
+        <div className="course-layout" style={{
           display: 'grid',
           gridTemplateColumns: 'minmax(0, 1fr) 300px',
           gap: '48px',
@@ -227,7 +227,7 @@ export default async function CourseDetailPage({ params }) {
           </div>
 
           {/* ── RIGHT SIDEBAR ── */}
-          <aside style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'sticky', top: '90px' }}>
+          <aside className="course-sidebar" style={{ display: 'flex', flexDirection: 'column', gap: '20px', position: 'sticky', top: '90px' }}>
 
             {/* Quick info card */}
             <div className="card" style={{ padding: '24px' }}>
@@ -353,7 +353,13 @@ export default async function CourseDetailPage({ params }) {
       {/* Responsive sidebar collapse */}
       <style>{`
         @media (max-width: 900px) {
-          .course-layout { grid-template-columns: 1fr !important; }
+          .course-layout {
+            grid-template-columns: 1fr !important;
+            gap: 28px !important;
+          }
+          .course-sidebar {
+            position: static !important;
+          }
         }
       `}</style>
     </div>

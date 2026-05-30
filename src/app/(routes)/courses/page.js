@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import { COURSES, CATEGORIES, CATEGORY_META } from '@/data/courses';
 import CourseCard from '@/components/courses/CourseCard';
+import Icon from '@/components/ui/Icon';
 
 // Static — data comes from the JS file, not the DB
 export const dynamic = 'force-static';
@@ -52,7 +53,7 @@ export default function CoursesPage() {
                     transition: 'border-color 0.2s, color 0.2s',
                   }}
                 >
-                  {meta.icon} {cat}
+                  <Icon name={meta.icon} color="var(--text-muted)" size={14} animate={false} /> {cat}
                 </a>
               );
             })}
@@ -91,9 +92,8 @@ export default function CoursesPage() {
                     border: `1px solid ${meta.color}30`,
                     borderRadius: '12px',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    fontSize: '1.4rem',
                   }}>
-                    {meta.icon}
+                    <Icon name={meta.icon || 'school'} color={meta.color} size={22} />
                   </div>
                   <div>
                     <h2 style={{ fontSize: 'clamp(1.3rem, 3vw, 1.8rem)', marginBottom: '2px' }}>
