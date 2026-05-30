@@ -42,6 +42,9 @@ function PlacementCard({ card, index }) {
   return (
     <motion.div
       variants={fadeUp}
+      initial="hidden"
+      animate="visible"
+      exit="hidden"
       className="card"
       style={{ padding: '24px', display: 'flex', flexDirection: 'column', gap: '16px' }}
       whileHover={{ borderColor: `${color}40` }}
